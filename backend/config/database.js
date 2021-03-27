@@ -5,6 +5,8 @@ const connectDataBase = () => {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true
+    }).catch(function (reason) {
+        console.log('Unable to connect to the mongodb instance. Error: ', reason);
     })
     .then(con => {
         console.log(`MongoDB DataBase connected with HOST: ${con.connection.host}`);
