@@ -44,7 +44,6 @@ exports.getSingleProduct = async (req,res,next) => {
 //Update Product details => /api/v1/product/:id
 exports.updateProduct = async (req,res,next) => {
 
-    
     let product = await Prodcut.findById(req.params.id);//Use let because we want to reassign it.
 
     if (!product) {
@@ -56,9 +55,9 @@ exports.updateProduct = async (req,res,next) => {
 
     product = await Product.findByIdAndUpdate(req.params.id, req.body ,{
         new:true,
+        runValidators:true,
         useFindAndModify: false,
-        runValidators:true
-    })
+    });
 
     res.status(200).json({
         success: true,
@@ -66,3 +65,25 @@ exports.updateProduct = async (req,res,next) => {
     })
 
 }
+
+//Delete product => /api/v1/admin/product/:id
+exports.deleteProduct = async (req, res ,next) => {
+    
+    const product = await Product.findById(req.params.id);
+
+    if(!product) {
+        return res.status(404).json({
+            success: false,
+            message: "Product not found"
+        })
+    }
+
+    await product.remove();
+
+    res.status(200).json({
+        success: true,
+        message: "product is deleted"
+    })
+
+}
+
