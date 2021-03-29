@@ -12,6 +12,4 @@ router.post('/admin/product/new',newProduct);
 
 router.put('/admin/product/:id',updateProduct);
 
-
-
 module.exports = router;
