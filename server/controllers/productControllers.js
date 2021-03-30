@@ -2,6 +2,8 @@
 
 const Product = require('../models/product');
 
+
+
 //Create new product => /api/v1/product/new
 exports.newProduct = async (req,res,next) => {
     const product = await Product.create(req.body);
@@ -44,14 +46,21 @@ exports.getSingleProduct = async (req,res,next) => {
 //Update Product details => /api/v1/product/:id
 exports.updateProduct = async (req,res,next) => {
 
-    let product = await Prodcut.findById(req.params.id);//Use let because we want to reassign it.
-
-    if (!product) {
+    try{
+    let product = await Product.findById(req.params.id);//Use let because we want to reassign it.
+    }catch {
         return res.status(404).json({
             success: false,
             message: 'Product not found'
         })
     }
+    // if (!product) {
+    //     return res.status(404).json({
+    //         success: false,
+    //         message: 'Product not found'
+    //     })
+    //}
+
 
     product = await Product.findByIdAndUpdate(req.params.id, req.body ,{
         new:true,
