@@ -4,7 +4,7 @@ module.exports = (err, req, res, next) => {
     err.statusCode = err.statusCode || 500; //if this doesn't exist then 500 will be by default
     err.message = err.message || 'Internal Server Error';
 
-    //Handling mongoose validation error
+    //Handling mongoose validation error, if u missing product name (something req)
     if(err.name === 'ValidationError') {
         const message = Object.values(err.errors).map(value=>value.message);
         error = new ErrorHandler(message,400);

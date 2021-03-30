@@ -53,7 +53,6 @@ exports.updateProduct = catchAsyncErr(async(req,res,next) => {
     // }
     if (!product) {
         return next(new ErrorHandler('Product not found',404));
-
     }
 
 
