@@ -9,11 +9,11 @@ router.get('/products',isAuthenticated,getProducts);
 
 router.get('/product/:id',getSingleProduct);
 
-router.post('/admin/product/new',newProduct,isAuthenticated,authorizeRoles('admin'));
+router.post('/admin/product/new',isAuthenticated,authorizeRoles('admin'),newProduct);
 
-router.put('/admin/product/:id',updateProduct,isAuthenticated,authorizeRoles('admin'));
+router.put('/admin/product/:id',isAuthenticated,authorizeRoles('admin'),updateProduct);
 
-router.delete('/admin/product/:id',deleteProduct,isAuthenticated,authorizeRoles('admin'));
+router.delete('/admin/product/:id',isAuthenticated,authorizeRoles('admin'),deleteProduct);
 
 
 module.exports = router;

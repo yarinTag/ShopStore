@@ -3,6 +3,7 @@ const User = require('../models/user');
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErr = require('../utils/catchAsyncErr');
 const sendToken = require('../utils/jwtToken');
+const sendEmail = require('../utils/sendEmail');
 
 //Register user => /api/v1/register
 exports.registerUser = catchAsyncErr(async (req,res,next) => {
@@ -48,6 +49,41 @@ exports.loginUser = catchAsyncErr(async(req,res,next) => {
 
 })
 
+//Forgot password => /api/v1/passowrd/forgot
+exports.forgotPassword = catchAsyncErr(async (req,res,next) => {
+    const user = await User.findOne({email: req.body.email});
+    if(!user) {
+        return next(new ErrorHandler('Email not found',401));
+    }
+
+    //get reset token
+    const resetToken = user.getResetPasswordToken();
+    await user.save({validateBeforeSave: false});
+
+    //create reset password url
+    const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/password/reset/${resetToken}`;
+    const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nif you have not requested this emailm, then ignore it`;
+
+    try {
+        await sendEmail({
+            email: user.email,
+            subject: 'ShopeStore password Recovery',
+            message: `Email sent to: ${user.email}`
+        })
+
+        res.status(200).json({
+            success: true,
+            message
+        })
+        
+    } catch (error) {
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
+
+        await user.save({validateBeforeSave: false});
+        return next(new ErrorHandler(error.message,500));
+    }
+})
 
 //LogOut user => /api/v1/logout
 exports.logOut = catchAsyncErr(async (req,res,next) => {
