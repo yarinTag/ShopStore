@@ -111,6 +111,7 @@ exports.resetPassword = catchAsyncErr(async (req, res, next) => {
         return next(new ErrorHandler('Password does not match', 400));
     }
 
+
     //setup new password
     user.password = req.body.password;
 
@@ -121,7 +122,6 @@ exports.resetPassword = catchAsyncErr(async (req, res, next) => {
     await user.save();
 
     sendToken(user, 200, res);
-
 
 })
 
