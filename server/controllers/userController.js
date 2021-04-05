@@ -1,3 +1,4 @@
+const axios = require('axios');
 const User = require('../models/user');
 
 const ErrorHandler = require('../utils/errorHandler');
@@ -5,6 +6,7 @@ const catchAsyncErr = require('../utils/catchAsyncErr');
 const sendToken = require('../utils/jwtToken');
 const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
+
 
 //Register user => /api/v1/register
 exports.registerUser = catchAsyncErr(async (req, res, next) => {
@@ -125,6 +127,7 @@ exports.resetPassword = catchAsyncErr(async (req, res, next) => {
 
 })
 
+
 //Get currently logged in user details => /api/v1/me
 exports.getUserProfile = catchAsyncErr(async(req,res,next) => {
     const user = await User.findById(req.user.id);
@@ -133,6 +136,29 @@ exports.getUserProfile = catchAsyncErr(async(req,res,next) => {
         user
     })
 })
+
+//Change password => /api/v1/password/update
+exports.changePassword = catchAsyncErr(async(req,res,next) => {
+    const user = await User.findById(req.user.id).select('+password');
+    //check previous password
+    const oldPassword = await user.comparePassword(req.body.oldPassword); //in our user model
+    if(!oldPassword) {
+        return next(new ErrorHandler('Old password is incorrect'));
+    }
+
+    user.password = req.body.password;
+
+    await user.save();
+
+    sendToken(user,200,res);
+})
+
+exports.getAllProductApi = catchAsyncErr(async(req,res,next) => {
+
+
+
+})
+
 
 //LogOut user => /api/v1/logout
 exports.logOut = catchAsyncErr(async (req, res, next) => {

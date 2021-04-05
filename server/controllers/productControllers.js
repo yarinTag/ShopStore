@@ -1,7 +1,7 @@
 //this will handle all the product related logic's or functions, controller functions.
 
 const Product = require('../models/product');
-
+const axios = require('axios');
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErr = require('../utils/catchAsyncErr');
 const APIFeatures = require('../utils/apiFeatures');
@@ -79,6 +79,16 @@ exports.updateProduct = catchAsyncErr(async(req,res,next) => {
         product
     })
 
+})
+
+
+exports.getAllProductApi = catchAsyncErr(async(req,res,next) => {
+
+    const {keywords = 'iphone'} = req.query;
+
+    const result = await axios.get(`https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-NAME=FindingService&SERVICE-VERSION=1.0.0&GLOBAL-ID=EBAY-US&SECURITY-APPNAME=nirassar-webShop-PRD-284deb120-c60ded92&RESPONSE-DATA-FORMAT=JSON&outputSelector(0)=SellerInfo&outputSelector(1)=StoreInfo&keywords=${keywords}`);
+    res.send(result.data);
+    
 })
 
 //Delete product => /api/v1/admin/product/:id
