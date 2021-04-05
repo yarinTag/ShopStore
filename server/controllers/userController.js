@@ -4,6 +4,7 @@ const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErr = require('../utils/catchAsyncErr');
 const sendToken = require('../utils/jwtToken');
 const sendEmail = require('../utils/sendEmail');
+const crypto = require('crypto');
 
 //Register user => /api/v1/register
 exports.registerUser = catchAsyncErr(async (req,res,next) => {
@@ -68,7 +69,7 @@ exports.forgotPassword = catchAsyncErr(async (req,res,next) => {
         await sendEmail({
             email: user.email,
             subject: 'ShopeStore password Recovery',
-            message: `Email sent to: ${user.email}`
+            message: `${message}: ${user.email}`
         })
 
         res.status(200).json({
@@ -83,6 +84,39 @@ exports.forgotPassword = catchAsyncErr(async (req,res,next) => {
         await user.save({validateBeforeSave: false});
         return next(new ErrorHandler(error.message,500));
     }
+})
+
+//Reset Password => /api/v1/password/reset/:token
+exports.resetPassword = catchAsyncErr(async (req,res,next) => {
+     
+    //hash URL token - to make sure the token is correct
+    const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
+
+    const user = await User.findOne({
+        resetPasswordToken,
+        resetPasswordExpire: { $gt: Date.now()}
+    })
+
+     if(!user) {
+         return next(new ErrorHandler(`Password reset token is invalid or expired`,400));
+     }
+
+     if(req.body.password !== req.body.confirmPassword) { //one is password and one to confirm password
+         return next(new ErrorHandler('Password does not match', 400));
+     }
+
+     //setup new password
+     user.password = req.body.password;
+
+     //have to make these tools undefined after setting the new password bc we don't have to leave it open 
+     user.resetPasswordToken = undefined;
+     user.resetPasswordExpire = undefined;
+      
+     await user.save();
+
+     sendToken(user,200,res);
+
+
 })
 
 //LogOut user => /api/v1/logout
