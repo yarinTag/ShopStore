@@ -27,7 +27,8 @@ class Register extends React.Component {
     handleClick = async () => {
         const result = await registerService(this.state);
     }
-
+    
+    
 
     render() {
         return (
@@ -126,5 +127,7 @@ class Register extends React.Component {
 
 
 }
+
+
 
 export default Register
