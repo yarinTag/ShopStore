@@ -1,4 +1,3 @@
-const axios = require('axios');
 const User = require('../models/user');
 
 const ErrorHandler = require('../utils/errorHandler');
@@ -153,10 +152,23 @@ exports.changePassword = catchAsyncErr(async(req,res,next) => {
     sendToken(user,200,res);
 })
 
-exports.getAllProductApi = catchAsyncErr(async(req,res,next) => {
+//Update user profile => /api/v1/me/update
+exports.updateProfile = catchAsyncErr(async(req,res,next) => {
+    const userDataUpdate = {
+        firsName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email
+    }
 
+    const user = await User.findByIdAndUpdate(req.user.id,userDataUpdate, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
 
-
+    res.status(200).json ({
+        success: true
+    })
 })
 
 
