@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { serverApi } from '../../config'
+import { Link, Redirect } from "react-router-dom"
 
 class Register extends React.Component {
     constructor() {
@@ -31,10 +32,13 @@ class Register extends React.Component {
         axios.post(`${serverApi}/api/v1/register`, newUser)
             .then(res => console.log(res.data))
 
+
+
     }
 
 
     render() {
+        if (this.props.loggedIn || localStorage.getItem("token")) return <Redirect to="/" />
         return (
             <div class="register">
                 <div class="container">
@@ -44,10 +48,10 @@ class Register extends React.Component {
                             <p class="lead text-center">Create your account</p>
                             <form action="create-profile.html">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-lg" placeholder="first name" name="firstName" onChange={this.onChange} value={this.state.firstName} />
+                                    <input type="text" class="form-control form-control-lg" placeholder="First Name" name="firstName" onChange={this.onChange} value={this.state.firstName} />
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-lg" placeholder="last name" name="lastName" onChange={this.onChange} value={this.state.lastName} />
+                                    <input type="text" class="form-control form-control-lg" placeholder="Last Name" name="lastName" onChange={this.onChange} value={this.state.lastName} />
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-lg" placeholder="Email Address" name="email" onChange={this.onChange} value={this.state.email} />
@@ -55,7 +59,7 @@ class Register extends React.Component {
                                 <div class="form-group">
                                     <input type="password" class="form-control form-control-lg" placeholder="Password" name="password" onChange={this.onChange} value={this.state.password} />
                                 </div>
-                                <input type="submit" class="btn btn-info btn-block mt-4" onClick={this.onSubmit} />
+                                <button type="button" class="btn btn-info btn-block mt-4" onClick={this.onSubmit}>Submit</button>
                             </form>
                         </div>
                     </div>

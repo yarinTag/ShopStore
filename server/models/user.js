@@ -67,7 +67,7 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
 //Return Json Web Token
 userSchema.methods.getJwtToken = function () {
     return jwt.sign({
-        id: this._id
+        id: this._id,
     },
         process.env.JWT_SECRET,
         {

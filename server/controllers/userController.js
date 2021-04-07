@@ -44,6 +44,7 @@ exports.loginUser = catchAsyncErr(async (req, res, next) => {
 
     if (!user) {
         return next(new ErrorHandler('Invalid Email or Password', 401));
+        //  res.json({message:'Invalid Email or Password'});
     }
 
     //Checks if password is correct 
@@ -128,7 +129,7 @@ exports.resetPassword = catchAsyncErr(async (req, res, next) => {
 
 
 //Get currently logged in user details => /api/v1/me
-exports.getUserProfile = catchAsyncErr(async(req,res,next) => {
+exports.getUserProfile = catchAsyncErr(async (req, res, next) => {
     const user = await User.findById(req.user.id);
     res.status(200).json({
         success: true,
@@ -137,11 +138,11 @@ exports.getUserProfile = catchAsyncErr(async(req,res,next) => {
 })
 
 //Change password => /api/v1/password/update
-exports.changePassword = catchAsyncErr(async(req,res,next) => {
+exports.changePassword = catchAsyncErr(async (req, res, next) => {
     const user = await User.findById(req.user.id).select('+password');
     //check previous password
     const oldPassword = await user.comparePassword(req.body.oldPassword); //in our user model
-    if(!oldPassword) {
+    if (!oldPassword) {
         return next(new ErrorHandler('Old password is incorrect'));
     }
 
@@ -149,24 +150,24 @@ exports.changePassword = catchAsyncErr(async(req,res,next) => {
 
     await user.save();
 
-    sendToken(user,200,res);
+    sendToken(user, 200, res);
 })
 
 //Update user profile => /api/v1/me/update
-exports.updateProfile = catchAsyncErr(async(req,res,next) => {
+exports.updateProfile = catchAsyncErr(async (req, res, next) => {
     const userDataUpdate = {
         firsName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email
     }
 
-    const user = await User.findByIdAndUpdate(req.user.id,userDataUpdate, {
+    const user = await User.findByIdAndUpdate(req.user.id, userDataUpdate, {
         new: true,
         runValidators: true,
         useFindAndModify: false
     })
 
-    res.status(200).json ({
+    res.status(200).json({
         success: true
     })
 })
@@ -189,20 +190,20 @@ exports.logOut = catchAsyncErr(async (req, res, next) => {
 //<--------------- Admin Routes --------------->
 
 //Get all users => /api/v1/admin/users
-exports.allUsers = catchAsyncErr(async (req,res,next) => {
+exports.allUsers = catchAsyncErr(async (req, res, next) => {
     const users = await User.find();
 
-    res.status(200).json ({
+    res.status(200).json({
         success: true,
         users
     })
 })
 
 //Get user details => /api/v1/admin/user/:id
-exports.getUserDetails = catchAsyncErr( async (req,res,next) => {
+exports.getUserDetails = catchAsyncErr(async (req, res, next) => {
     const user = await User.findById(req.params.id);
 
-    if(!user) {
+    if (!user) {
         return next(new ErrorHandler(`User does not exists with id: ${req.params.id} `));
     }
 
