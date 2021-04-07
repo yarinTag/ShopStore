@@ -1,7 +1,15 @@
+import axios from 'axios';
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+
+
 class Navbar extends Component {
+
+    handleSignOut = () => {
+        if (localStorage.getItem("token")) this.props.handleLogin()
+        localStorage.removeItem("token");
+    }
     render() {
         return (
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
@@ -10,6 +18,7 @@ class Navbar extends Component {
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
                         <span className="navbar-toggler-icon"></span>
                     </button>
+
 
                     <div className="collapse navbar-collapse" id="mobile-nav">
                         <ul className="navbar-nav mr-auto">
@@ -25,18 +34,35 @@ class Navbar extends Component {
                             </li>
                         </ul>
 
-                        <ul className="navbar-nav ml-auto">
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/login">
-                                    Login
+                        {!localStorage.getItem("token") ?
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/register">
+                                        Sign Up
                                     </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/register">
-                                    Sign Up
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/login">
+                                        Login
                                     </Link>
-                            </li>
-                        </ul>
+                                </li>
+
+                            </ul>
+                            :
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/" onClick={this.handleSignOut}>
+                                        Dashboard
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/" onClick={this.handleSignOut}>
+                                        Sign out
+                                    </Link>
+                                </li>
+                            </ul>
+
+                        }
                     </div>
                 </div>
             </nav>
