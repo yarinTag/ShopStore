@@ -211,3 +211,23 @@ exports.getUserDetails = catchAsyncErr( async (req,res,next) => {
         user
     });
 })
+
+//Update user profile => /api/v1/admin/user/:id
+exports.updateUser = catchAsyncErr(async(req,res,next) => {
+    const userDataUpdate = {
+        firsName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        role: req.body.role
+    }
+
+    const user = await User.findByIdAndUpdate(req.params.id,userDataUpdate, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
+
+    res.status(200).json ({
+        success: true
+    })
+})
