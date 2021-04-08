@@ -36,3 +36,7 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
+
+#navBar {
+margin-left: 2px
+}

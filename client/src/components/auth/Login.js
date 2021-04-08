@@ -8,37 +8,38 @@ class Login extends React.Component {
         super();
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            message: ""
         }
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
     }
-    onChange(e) {
+    onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     }
     onSubmit = (e) => {
-        e.preventDefault();
-        const user = {
-            email: this.state.email,
-            password: this.state.password
-        }
-        axios.post(`${serverApi}/api/v1/login`, user)
+        const { message, ...rest } = this.state
+        axios.post(`${serverApi}/api/v1/login`, rest)
             .then(res => {
-
-                localStorage.setItem("token", res.data.token);
+                this.setState({ message: res.data.message })
+                if (res.data.token) localStorage.setItem("token", res.data.token);
                 const token = localStorage.getItem("token");
-                if (token) {
-                    this.props.handleLogin()
-                    return (<Redirect to="/" />)
-                }
 
+                if (token) {
+                    this.props.handleLogin(res.data.user.role)
+
+                }
+            }).catch((error) => {
+                console.log(error)
             })
+
 
 
 
     }
 
     render() {
+        if (this.props.loggedIn || localStorage.getItem("token")) return <Redirect to="/" />
+        const { message } = this.state
+
         return (
             <div class="container">
                 <div class="row">
@@ -52,7 +53,8 @@ class Login extends React.Component {
                             <div class="form-group">
                                 <input type="password" class="form-control form-control-lg" placeholder="Password" name="password" onChange={this.onChange} value={this.state.password} />
                             </div>
-                            <input type="submit" class="btn btn-info btn-block mt-4" onClick={this.onSubmit} />
+                            <span style={{ color: "red" }}>{message}</span>
+                            <button type="button" class="btn btn-info btn-block mt-4" onClick={this.onSubmit}>Log in</button>
                         </form>
                     </div>
                 </div>

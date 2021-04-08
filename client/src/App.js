@@ -8,25 +8,31 @@ import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import './App.css';
 
+
+
 class App extends React.Component {
   state = {
     
-    loggedIn: false
+    loggedIn: false,
+     userRole: "user"
   }
 
-  handleLogin = () => {
-    const loggedIn = !this.state.loggedIn 
-    this.setState({ loggedIn })
+  handleLogin = (userRole) => {
+    const loggedIn = !this.state.loggedIn
+    console.log(userRole)
+    this.setState({ loggedIn, userRole })
   }
   render() {
+    const { userRole, loggedIn } = this.state;
+
     return (
       <Router>
         <div className="App">
-          <Navbar handleLogin={this.handleLogin} />
+          <Navbar handleLogin={this.handleLogin} userRole={userRole} />
           <Route exact path="/" component={Landing} />
           <div className="container">
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={() => <Login handleLogin={this.handleLogin} />} />
+            <Route exact path="/register" component={()=><Register loggedIn={loggedIn}/>} />
+            <Route exact path="/login" component={() => <Login handleLogin={this.handleLogin} loggedIn={loggedIn} />} />
           </div>
           <Footer />
         </div>

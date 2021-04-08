@@ -11,9 +11,11 @@ app.use(cors())
 //Import all routes
 const products = require('./routes/product');
 const userAuth = require('./routes/userAuth');
+const order = require('./routes/order');
 
 app.use('/api/v1', products)
 app.use('/api/v1', userAuth)
+app.use('/api/v1',order);
 
 
 //To handle Errors
