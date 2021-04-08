@@ -12,8 +12,9 @@ import './App.css';
 
 class App extends React.Component {
   state = {
+    
     loggedIn: false,
-    userRole: "user"
+     userRole: "user"
   }
 
   handleLogin = (userRole) => {
