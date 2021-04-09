@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import Landing from './components/layout/Landing'
+import Home from './components/layout/Home'
+
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import './App.css';
@@ -34,6 +36,7 @@ class App extends React.Component {
             <Route exact path="/register" component={()=><Register loggedIn={loggedIn}/>} />
             <Route exact path="/login" component={() => <Login handleLogin={this.handleLogin} loggedIn={loggedIn} />} />
           </div>
+          <Route exact path="/products" component={Home}/>
           <Footer />
         </div>
       </Router>
