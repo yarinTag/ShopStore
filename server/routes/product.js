@@ -5,7 +5,7 @@ const router = require('express').Router();
 const {getProducts,newProduct,getSingleProduct,updateProduct,deleteProduct,getAllProductApi} = require('../controllers/productControllers');
 const {isAuthenticated,authorizeRoles} = require('../utils/auth');
 
-router.get('/products',isAuthenticated,getProducts);
+router.get('/products',getProducts);
 
 router.get('/product/:id',getSingleProduct);
 

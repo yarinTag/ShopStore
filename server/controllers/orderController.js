@@ -9,8 +9,8 @@ exports.newOrder = catchAsyncErr(async (req,res,next) => {
     const {
         orderItems,
         shippingInfo,
-        itemPrice,
-        texPrice,
+        itemsPrice,
+        taxPrice,
         shippingPrice,
         totalPrice,
         paymentInfo
@@ -19,8 +19,8 @@ exports.newOrder = catchAsyncErr(async (req,res,next) => {
     const order =await Order.create({
         orderItems,
         shippingInfo,
-        itemPrice,
-        texPrice,
+        itemsPrice,
+        taxPrice,
         shippingPrice,
         totalPrice,
         paymentInfo,
