@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
-import Home from "./components/layout/Home";
+import Products from "./components/layout/Products";
 
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
@@ -45,7 +45,7 @@ class App extends React.Component {
               )}
             />
           </div>
-          <Route exact path="/products" component={Home} />
+          <Route exact path="/products" component={Products} />
           <Route exact path="/product/:id" component={ProductDetails} />
           <Footer />
         </div>
