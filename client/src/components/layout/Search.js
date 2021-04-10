@@ -1,15 +1,25 @@
 import React, { useState } from "react";
+import {
+  Button,
+  Input,
+  Footer,
+  Card,
+  CardBody,
+  CardImage,
+  CardTitle,
+  CardText,
+} from "mdbreact";
 
 const Search = ({ history }) => {
-  const [keyword, setkeyWord] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   const searchHandler = (e) => {
     e.preventDefault();
 
-    if (keyword) {
-      history.pushState(`/search/${keyword}`);
+    if (keyword.trim()) {
+      history.push(`/products/search/${keyword}`);
     } else {
-      history.pushState("/");
+      history.push("/products");
     }
   };
 
@@ -21,10 +31,10 @@ const Search = ({ history }) => {
           id="search_field"
           className="from-control"
           placeholder="Enter Product Name..."
-          onChange={(e) => setkeyWord(e.target.value)}
+          onChange={(e) => setKeyword(e.target.value)}
         />
         <div className="input-group-append">
-          <button id="search_btn" className="btn">
+          <button id="search_btn" className="btn" onClick={searchHandler}>
             Click Me
           </button>
         </div>

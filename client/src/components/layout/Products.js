@@ -16,7 +16,6 @@ const Products = ({ match }) => {
     productsCounter,
     resultsPerPage,
   } = useSelector((state) => state.products);
-  console.log(products);
 
   const keyword = match.params.keyword;
 
@@ -38,7 +37,7 @@ const Products = ({ match }) => {
           <div className="container container-fluid">
             <h1 id="products_heading">Latest Products</h1>
             <div>
-              <Route render={(history) => <Search history={history} />} />
+              <Route render={({ history }) => <Search history={history} />} />
             </div>
             <section id="products" className="container mt-5">
               <div className="row">

@@ -37,7 +37,7 @@ exports.getProducts = catchAsyncErr(async (req, res, next) => {
       resultsPerPage,
       products,
     });
-  }, 1000);
+  }, 500);
 });
 
 //Get single product details => /api/v1/product/:id
