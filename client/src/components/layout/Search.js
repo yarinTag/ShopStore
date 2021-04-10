@@ -34,8 +34,8 @@ const Search = ({ history }) => {
           onChange={(e) => setKeyword(e.target.value)}
         />
         <div className="input-group-append">
-          <button id="search_btn" className="btn" onClick={searchHandler}>
-            Click Me
+          <button id="search_btn" className="btn btn-primary" onClick={searchHandler}>
+            Search
           </button>
         </div>
       </div>

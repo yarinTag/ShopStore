@@ -20,19 +20,10 @@ const Products = ({ match }) => {
   const keyword = match.params.keyword;
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [category, setCategory] = useState("");
-
-  const categories = [
-    "Electronics",
-    "Cameras",
-    "Laptop",
-    "Accessories",
-    "Phones",
-  ];
 
   useEffect(() => {
-    dispatch(getProducts(keyword, currentPage, category));
-  }, [dispatch, keyword, currentPage, category]);
+    dispatch(getProducts(keyword, currentPage));
+  }, [dispatch, keyword, currentPage]);
 
   function setCurrentPageNu(pageNumber) {
     setCurrentPage(pageNumber);
@@ -48,38 +39,59 @@ const Products = ({ match }) => {
             <div>
               <Route render={({ history }) => <Search history={history} />} />
             </div>
-            <section id="products" className="container mt-5">
-              <hr className="my-5" />
 
-              <div className="mt-5">
-                <h4 className="mb-3">Categories</h4>
-
-                <ul className="pl-0">
-                  {categories.map((category) => (
-                    <li
-                      style={{
-                        cursor: "pointer",
-                        listStyleType: "none",
-                      }}
-                      key={category}
-                      onClick={() => setCategory(category)}
-                    >
-                      {category}
-                    </li>
-                  ))}
-                </ul>
+            <section id="products" class="row" style={{ marginTop: "10px" }} >
+              <div class="form-check" class="col-md-2" style={{ marginTop: "15px" }}>
+                <h6>Categories</h6>
+                <div>
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Electronics
+               </label>
+                </div>
+                <div>
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Cameras
+               </label>
+                </div>
+                <div>
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Laptop
+               </label>
+                </div>
+                <div>
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Accessories
+               </label>
+                </div>
+                <div>
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Home
+               </label>
+                </div>
+                <div>
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Outdoor
+               </label>
+                </div>
               </div>
-              <div className="row">
+              <div class="col-md-10" style={{ display: "flex" }}>
                 {products &&
                   products.map((product) => (
                     <div
                       className="col-sm-12 col-md-6 col-lg-3 my-3"
                       key={product._id}
                     >
-                      <div className="card p-3 rounded">
+                      <div className="card p-3 rounded" >
                         <img
                           className="card-img-top mx-auto"
                           src={product.images[0].url}
+                          height="150px"
                         />
                         <div className="card-body d-flex flex-column">
                           <h5 className="card-title">
@@ -99,7 +111,7 @@ const Products = ({ match }) => {
                           <Link
                             to={`/product/${product._id}`}
                             id="view_btn"
-                            className="btn btn-block"
+                            className="btn btn-primary"
                           >
                             View Details
                           </Link>
