@@ -20,10 +20,19 @@ const Products = ({ match }) => {
   const keyword = match.params.keyword;
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [category, setCategory] = useState("");
+
+  const categories = [
+    "Electronics",
+    "Cameras",
+    "Laptop",
+    "Accessories",
+    "Phones",
+  ];
 
   useEffect(() => {
-    dispatch(getProducts(keyword, currentPage));
-  }, [dispatch, keyword, currentPage]);
+    dispatch(getProducts(keyword, currentPage, category));
+  }, [dispatch, keyword, currentPage, category]);
 
   function setCurrentPageNu(pageNumber) {
     setCurrentPage(pageNumber);
@@ -40,6 +49,26 @@ const Products = ({ match }) => {
               <Route render={({ history }) => <Search history={history} />} />
             </div>
             <section id="products" className="container mt-5">
+              <hr className="my-5" />
+
+              <div className="mt-5">
+                <h4 className="mb-3">Categories</h4>
+
+                <ul className="pl-0">
+                  {categories.map((category) => (
+                    <li
+                      style={{
+                        cursor: "pointer",
+                        listStyleType: "none",
+                      }}
+                      key={category}
+                      onClick={() => setCategory(category)}
+                    >
+                      {category}
+                    </li>
+                  ))}
+                </ul>
+              </div>
               <div className="row">
                 {products &&
                   products.map((product) => (

@@ -10,7 +10,7 @@ import {
 } from "../constants/productConstants";
 import { serverApi } from "../config";
 
-export const getProducts = (keyword = "", currentPage = 1) => async (
+export const getProducts = (keyword = "", currentPage = 1, category) => async (
   dispatch
 ) => {
   try {
@@ -18,9 +18,13 @@ export const getProducts = (keyword = "", currentPage = 1) => async (
       type: ALL_PRODUCTS_REQ,
     });
 
-    const { data } = await axios.get(
-      `/api/v1/products?keyword=${keyword}&page=${currentPage}`
-    );
+    let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}`;
+
+    if (category) {
+      link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&category=${category}`;
+    }
+
+    const { data } = await axios.get(link);
 
     dispatch({
       type: ALL_PRODUCTS_SUCCESS,
