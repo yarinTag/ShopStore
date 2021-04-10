@@ -1,20 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../actions/productActions";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import Loader from "./Loader";
+import Pagination from "react-js-pagination";
+import Search from "./Search";
 
-const Products = () => {
+const Products = ({ match }) => {
   const dispatch = useDispatch();
   //Pull the products from the state
-  const { loading, products, error, productCounter } = useSelector(
-    (state) => state.products
-  );
+  const {
+    loading,
+    products,
+    error,
+    productsCounter,
+    resultsPerPage,
+  } = useSelector((state) => state.products);
+  console.log(products);
+
+  const keyword = match.params.keyword;
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+    dispatch(getProducts(keyword, currentPage));
+  }, [dispatch, keyword, currentPage]);
 
+  function setCurrentPageNu(pageNumber) {
+    setCurrentPage(pageNumber);
+  }
   return (
     <>
       {loading ? (
@@ -23,6 +37,9 @@ const Products = () => {
         <>
           <div className="container container-fluid">
             <h1 id="products_heading">Latest Products</h1>
+            <div>
+              <Route render={(history) => <Search history={history} />} />
+            </div>
             <section id="products" className="container mt-5">
               <div className="row">
                 {products &&
@@ -64,6 +81,20 @@ const Products = () => {
                   ))}
               </div>
             </section>
+          </div>
+          <div className="d-flex justify-content-center mt-5">
+            <Pagination
+              activePage={currentPage}
+              itemsCountPerPage={resultsPerPage}
+              totalItemsCount={productsCounter}
+              onChange={setCurrentPageNu}
+              nextPageText={"Next"}
+              prevPageText={"Prev"}
+              firstPageText={"First"}
+              lastPageText={"Last"}
+              itemClass="page-item"
+              linkClass="page-link"
+            />
           </div>
         </>
       )}

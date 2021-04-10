@@ -46,6 +46,7 @@ class App extends React.Component {
             />
           </div>
           <Route exact path="/products" component={Products} />
+          <Route exact path="/products/search/:keyword" component={Products} />
           <Route exact path="/product/:id" component={ProductDetails} />
           <Footer />
         </div>

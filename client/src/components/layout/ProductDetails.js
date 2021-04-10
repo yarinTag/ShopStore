@@ -16,6 +16,7 @@ const ProductDetails = ({ match }) => {
       dispatch(clearErrors);
     }
   }, [dispatch, error, match.params.id]);
+
   console.log(product);
 
   return (

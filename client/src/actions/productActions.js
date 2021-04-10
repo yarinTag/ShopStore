@@ -10,13 +10,17 @@ import {
 } from "../constants/productConstants";
 import { serverApi } from "../config";
 
-export const getProducts = () => async (dispatch) => {
+export const getProducts = (keyword = "", currentPage = 1) => async (
+  dispatch
+) => {
   try {
     dispatch({
       type: ALL_PRODUCTS_REQ,
     });
 
-    const { data } = await axios.get(`/api/v1/products`);
+    const { data } = await axios.get(
+      `/api/v1/products?keyword=${keyword}&page=${currentPage}`
+    );
 
     dispatch({
       type: ALL_PRODUCTS_SUCCESS,
