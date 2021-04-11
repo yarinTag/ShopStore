@@ -3,6 +3,7 @@ import { countries } from "countries-list";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingInfo } from "../../actions/cartActions";
 import CheckoutSteps from "./CheckoutSteps";
+import { Link, Route } from "react-router-dom";
 
 const Shipping = ({ history }) => {
   const { shippingInfo } = useSelector((state) => state.cart);
@@ -31,9 +32,9 @@ const Shipping = ({ history }) => {
     <>
       <CheckoutSteps shipping />
 
-      <div className="row wrapper">
+      <div style={{ marginLeft: "460px" }}>
         <div className="col-10 col-lg-5">
-          <form className="shadow-lg" onSubmit={submitHandler}>
+          <form onSubmit={submitHandler}>
             <h1 className="mb-4">Shipping Info</h1>
             <div className="form-group">
               <label htmlFor="address_field">Address</label>
@@ -99,14 +100,15 @@ const Shipping = ({ history }) => {
                 ))}
               </select>
             </div>
-
-            <button
-              id="shipping_btn"
-              type="submit"
-              className="btn btn-block py-3"
-            >
-              CONTINUE
+            <Link to="/order/confirm">
+              <button
+                id="shipping_btn"
+                type="submit"
+                className="btn btn-primary"
+              >
+                CONTINUE
             </button>
+            </Link>
           </form>
         </div>
       </div>
