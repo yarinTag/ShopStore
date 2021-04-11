@@ -3,17 +3,22 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   CLEAR_ERRORS,
+  REGISTER_REQ,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
 } from "../constants/authConstants";
 
 export const authReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case LOGIN_REQ:
+    case REGISTER_REQ:
       return {
         loading: true,
         isAuthenticated: false,
       };
 
     case LOGIN_SUCCESS:
+    case REGISTER_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -22,6 +27,7 @@ export const authReducer = (state = { user: {} }, action) => {
       };
 
     case LOGIN_FAIL:
+    case REGISTER_FAIL:
       return {
         ...state,
         loading: false,

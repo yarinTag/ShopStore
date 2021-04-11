@@ -1,14 +1,4 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Input,
-  Footer,
-  Card,
-  CardBody,
-  CardImage,
-  CardTitle,
-  CardText,
-} from "mdbreact";
 
 const Search = ({ history }) => {
   const [keyword, setKeyword] = useState("");
@@ -34,7 +24,11 @@ const Search = ({ history }) => {
           onChange={(e) => setKeyword(e.target.value)}
         />
         <div className="input-group-append">
-          <button id="search_btn" className="btn btn-primary" onClick={searchHandler}>
+          <button
+            id="search_btn"
+            className="btn btn-primary"
+            onClick={searchHandler}
+          >
             Search
           </button>
         </div>
