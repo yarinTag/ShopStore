@@ -24,7 +24,7 @@ class Login extends React.Component {
                 const token = localStorage.getItem("token");
 
                 if (token) {
-                    this.props.handleLogin(res.data.user.role)
+                    this.props.handleLogin(res.data.user.role, res.data.user.firstName)
 
                 }
             }).catch((error) => {

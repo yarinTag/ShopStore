@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 class Navbar extends Component {
   handleSignOut = () => {
@@ -8,7 +10,7 @@ class Navbar extends Component {
   };
 
   render() {
-    const { userRole } = this.props;
+    const { userRole, firstName } = this.props;
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         {/* <div className="container"  > */}
@@ -92,8 +94,29 @@ class Navbar extends Component {
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <div className="testest">
+
+                <div className="nav-link">
+                  <div id="userBar" style={{ display: "flex", height: "10px" }}>
+                    <AccountCircleIcon />
+                    <p>{firstName}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li className="nav-item">
+              <div className="testest">
+                <Link className="nav-link" to="/" >
+                  <div id="shopBar" style={{ display: "flex", height: "10px" }}>
+                    <ShoppingCartOutlinedIcon size="12px" />
+                    <p> (0) </p>
+                  </div>
+                </Link>
+              </div>
+            </li>
+            <li className="nav-item">
+              <div className="testest">
                 <Link className="nav-link" to="/" onClick={this.handleSignOut}>
-                    Sign out
+                  Sign out
                 </Link>
               </div>
             </li>
