@@ -4,9 +4,12 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
+
 import Products from "./components/layout/Products";
 import Cart from "./components/cart/Cart";
 import Shipping from "./components/cart/Shipping";
+import ConfirmOrder from "./components/cart/ConfirmOrder";
+
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 
@@ -47,6 +50,7 @@ class App extends React.Component {
             />
           </div>
           <Route exact path="/shipping" component={Shipping} />
+          <Route exact path="/order/confirm" component={ConfirmOrder} />
           <Route exact path="/products" component={Products} />
           <Route exact path="/products/search/:keyword" component={Products} />
           <Route exact path="/product/:id" component={ProductDetails} />
