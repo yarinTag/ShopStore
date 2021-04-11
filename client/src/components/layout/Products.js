@@ -5,6 +5,8 @@ import { Link, Route } from "react-router-dom";
 import Loader from "./Loader";
 import Pagination from "react-js-pagination";
 import Search from "./Search";
+import InfoIcon from '@material-ui/icons/Info';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const Products = ({ match }) => {
   const dispatch = useDispatch();
@@ -43,7 +45,7 @@ const Products = ({ match }) => {
         <Loader />
       ) : (
         <>
-          <div className="container container-fluid">
+          <div className="container container-fluid" style={{ marginLeft: "20px" }}>
             <h1 id="products_heading">Latest Products</h1>
             <div>
               <Route render={({ history }) => <Search history={history} />} />
@@ -70,72 +72,6 @@ const Products = ({ match }) => {
                     </li>
                   ))}
                 </ul>
-                {/* <div>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                  />
-                  <label class="form-check-label" for="flexCheckDefault">
-                    Electronics
-                  </label>
-                </div>
-                <div>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                  />
-                  <label class="form-check-label" for="flexCheckDefault">
-                    Cameras
-                  </label>
-                </div>
-                <div>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                  />
-                  <label class="form-check-label" for="flexCheckDefault">
-                    Laptop
-                  </label>
-                </div>
-                <div>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                  />
-                  <label class="form-check-label" for="flexCheckDefault">
-                    Accessories
-                  </label>
-                </div>
-                <div>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                  />
-                  <label class="form-check-label" for="flexCheckDefault">
-                    Home
-                  </label>
-                </div>
-                <div>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                  />
-                  <label class="form-check-label" for="flexCheckDefault">
-                    Outdoor
-                  </label>
-                </div> */}
               </div>
               <div class="col-md-10" style={{ display: "flex" }}>
                 {products &&
@@ -144,7 +80,7 @@ const Products = ({ match }) => {
                       className="col-sm-12 col-md-6 col-lg-3 my-3"
                       key={product._id}
                     >
-                      <div className="card p-3 rounded">
+                      <div className="card p-3 rounded" style={{height:"385px"}}>
                         <img
                           className="card-img-top mx-auto"
                           src={product.images[0].url}
@@ -165,13 +101,24 @@ const Products = ({ match }) => {
                             </span>
                           </div>
                           <p className="card-text">{product.price}</p>
-                          <Link
-                            to={`/product/${product._id}`}
-                            id="view_btn"
-                            className="btn btn-primary"
-                          >
-                            View Details
-                          </Link>
+                          <div class="divIcons">
+
+                            <Link
+                              to={`/product/${product._id}`}
+                              id="view_btn"
+
+                            >
+                              <InfoIcon style={{ fontSize: "35px" }} />
+                            </Link>
+
+                            <Link
+                              to="/cart"
+                              id="cart_btn"
+
+                            >
+                              <ShoppingCartIcon style={{ color: "green", marginLeft: "50px", fontSize: "35px" }} />
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
