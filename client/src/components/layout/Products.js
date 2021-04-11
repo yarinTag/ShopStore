@@ -20,10 +20,19 @@ const Products = ({ match }) => {
   const keyword = match.params.keyword;
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [category, setCategory] = useState("");
+
+  const categories = [
+    "Electronics",
+    "Cameras",
+    "Laptop",
+    "Accessories",
+    "Phones",
+  ];
 
   useEffect(() => {
-    dispatch(getProducts(keyword, currentPage));
-  }, [dispatch, keyword, currentPage]);
+    dispatch(getProducts(keyword, currentPage, category));
+  }, [dispatch, keyword, currentPage, category]);
 
   function setCurrentPageNu(pageNumber) {
     setCurrentPage(pageNumber);
@@ -40,45 +49,93 @@ const Products = ({ match }) => {
               <Route render={({ history }) => <Search history={history} />} />
             </div>
 
-            <section id="products" class="row" style={{ marginTop: "10px" }} >
-              <div class="form-check" class="col-md-2" style={{ marginTop: "15px" }}>
+            <section id="products" class="row" style={{ marginTop: "10px" }}>
+              <div
+                class="form-check"
+                class="col-md-2"
+                style={{ marginTop: "15px" }}
+              >
                 <h6>Categories</h6>
-                <div>
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                <ul className="pl-0">
+                  {categories.map((category) => (
+                    <li
+                      style={{
+                        cursor: "pointer",
+                        listStyleType: "none",
+                      }}
+                      key={category}
+                      onClick={() => setCategory(category)}
+                    >
+                      {category}
+                    </li>
+                  ))}
+                </ul>
+                {/* <div>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
                   <label class="form-check-label" for="flexCheckDefault">
                     Electronics
-               </label>
+                  </label>
                 </div>
                 <div>
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
                   <label class="form-check-label" for="flexCheckDefault">
                     Cameras
-               </label>
+                  </label>
                 </div>
                 <div>
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
                   <label class="form-check-label" for="flexCheckDefault">
                     Laptop
-               </label>
+                  </label>
                 </div>
                 <div>
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
                   <label class="form-check-label" for="flexCheckDefault">
                     Accessories
-               </label>
+                  </label>
                 </div>
                 <div>
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
                   <label class="form-check-label" for="flexCheckDefault">
                     Home
-               </label>
+                  </label>
                 </div>
                 <div>
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
                   <label class="form-check-label" for="flexCheckDefault">
                     Outdoor
-               </label>
-                </div>
+                  </label>
+                </div> */}
               </div>
               <div class="col-md-10" style={{ display: "flex" }}>
                 {products &&
@@ -87,7 +144,7 @@ const Products = ({ match }) => {
                       className="col-sm-12 col-md-6 col-lg-3 my-3"
                       key={product._id}
                     >
-                      <div className="card p-3 rounded" >
+                      <div className="card p-3 rounded">
                         <img
                           className="card-img-top mx-auto"
                           src={product.images[0].url}

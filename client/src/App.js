@@ -5,6 +5,7 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import Products from "./components/layout/Products";
+import Cart from "./components/cart/Cart";
 
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
@@ -48,6 +49,7 @@ class App extends React.Component {
           <Route exact path="/products" component={Products} />
           <Route exact path="/products/search/:keyword" component={Products} />
           <Route exact path="/product/:id" component={ProductDetails} />
+          <Route exact path="/cart" component={Cart} />
           <Footer />
         </div>
       </Router>
