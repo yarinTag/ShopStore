@@ -20,20 +20,20 @@ class App extends React.Component {
   state = {
     loggedIn: false,
     userRole: "user",
+    firstName: ""
   };
 
-  handleLogin = (userRole) => {
+  handleLogin = (userRole, firstName) => {
     const loggedIn = !this.state.loggedIn;
-    console.log(userRole);
-    this.setState({ loggedIn, userRole });
+    this.setState({ loggedIn, userRole, firstName });
   };
   render() {
-    const { userRole, loggedIn } = this.state;
+    const { userRole, loggedIn, firstName } = this.state;
 
     return (
       <Router>
         <div className="App">
-          <Navbar handleLogin={this.handleLogin} userRole={userRole} />
+          <Navbar handleLogin={this.handleLogin} userRole={userRole} firstName={firstName} />
           <Route exact path="/" component={Landing} />
           <div className="container">
             <Route

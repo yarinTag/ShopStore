@@ -6,6 +6,7 @@ import { Link, Redirect } from "react-router-dom";
 import { login, clearErrors } from "../../actions/authActions";
 
 class Login extends React.Component {
+<<<<<<< HEAD
   constructor() {
     super();
     this.state = {
@@ -25,6 +26,43 @@ class Login extends React.Component {
         this.setState({ message: res.data.message });
         if (res.data.token) localStorage.setItem("token", res.data.token);
         const token = localStorage.getItem("token");
+=======
+    constructor() {
+        super();
+        this.state = {
+            email: "",
+            password: "",
+            message: ""
+        }
+    }
+    onChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value })
+    }
+    onSubmit = (e) => {
+        const { message, ...rest } = this.state
+        axios.post(`${serverApi}/api/v1/login`, rest)
+            .then(res => {
+                this.setState({ message: res.data.message })
+                if (res.data.token) localStorage.setItem("token", res.data.token);
+                const token = localStorage.getItem("token");
+
+                if (token) {
+                    this.props.handleLogin(res.data.user.role, res.data.user.firstName)
+
+                }
+            }).catch((error) => {
+                console.log(error)
+            })
+
+
+
+
+    }
+
+    render() {
+        if (this.props.loggedIn || localStorage.getItem("token")) return <Redirect to="/" />
+        const { message } = this.state
+>>>>>>> 0b7b90ebc3d9d2d2ca01fca038ed4a043600a86a
 
         if (token) {
           this.props.handleLogin(res.data.user.role);
