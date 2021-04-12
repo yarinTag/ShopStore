@@ -4,7 +4,11 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
+
 import Products from "./components/layout/Products";
+import Cart from "./components/cart/Cart";
+import Shipping from "./components/cart/Shipping";
+import ConfirmOrder from "./components/cart/ConfirmOrder";
 
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
@@ -16,20 +20,20 @@ class App extends React.Component {
   state = {
     loggedIn: false,
     userRole: "user",
+    firstName: ""
   };
 
-  handleLogin = (userRole) => {
+  handleLogin = (userRole, firstName) => {
     const loggedIn = !this.state.loggedIn;
-    console.log(userRole);
-    this.setState({ loggedIn, userRole });
+    this.setState({ loggedIn, userRole, firstName });
   };
   render() {
-    const { userRole, loggedIn } = this.state;
+    const { userRole, loggedIn, firstName } = this.state;
 
     return (
       <Router>
         <div className="App">
-          <Navbar handleLogin={this.handleLogin} userRole={userRole} />
+          <Navbar handleLogin={this.handleLogin} userRole={userRole} firstName={firstName} />
           <Route exact path="/" component={Landing} />
           <div className="container">
             <Route
@@ -45,8 +49,12 @@ class App extends React.Component {
               )}
             />
           </div>
+          <Route exact path="/shipping" component={Shipping} />
+          <Route exact path="/order/confirm" component={ConfirmOrder} />
           <Route exact path="/products" component={Products} />
+          <Route exact path="/products/search/:keyword" component={Products} />
           <Route exact path="/product/:id" component={ProductDetails} />
+          <Route exact path="/cart" component={Cart} />
           <Footer />
         </div>
       </Router>
