@@ -78,7 +78,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+// export default Login;
 // class Login extends React.Component {
 //   constructor() {
 //     super();
@@ -156,4 +156,4 @@ export default Login;
 //   }
 // }
 
-// export default Login;
+export default Login;
