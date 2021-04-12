@@ -100,15 +100,9 @@ const Shipping = ({ history }) => {
                 ))}
               </select>
             </div>
-            <Link to="/order/confirm">
-              <button
-                id="shipping_btn"
-                type="submit"
-                className="btn btn-primary"
-              >
-                CONTINUE
+            <button id="shipping_btn" type="submit" className="btn btn-primary">
+              CONTINUE
             </button>
-            </Link>
           </form>
         </div>
       </div>

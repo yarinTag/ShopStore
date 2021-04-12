@@ -6,7 +6,7 @@ import { addItemToCart, removeItemFromCart } from "../../actions/cartActions";
 const Cart = ({ history }) => {
   const dispatch = useDispatch();
 
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems, shippingInfo } = useSelector((state) => state.cart);
 
   const removeCartItemHandler = (id) => {
     dispatch(removeItemFromCart(id));
@@ -29,7 +29,7 @@ const Cart = ({ history }) => {
   };
 
   const checkoutHandler = () => {
-    history.push("/login?redirect=shipping");
+    history.push("/shipping");
   };
 
   return (
@@ -52,7 +52,8 @@ const Cart = ({ history }) => {
                     <div className="row">
                       <div className="col-4 col-lg-3">
                         <img
-                          src={item.image} style={{ height: "200px" }}
+                          src={item.image}
+                          style={{ height: "200px" }}
                           alt="Laptop"
                           height="90"
                           width="115"

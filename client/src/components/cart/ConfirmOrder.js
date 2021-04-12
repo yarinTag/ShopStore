@@ -5,12 +5,13 @@ import { useSelector } from "react-redux";
 
 const ConfirmOrder = ({ history }) => {
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
-  const { user } = useSelector((state) => state); //TODO
+  const { auth } = useSelector((state) => state); //TODO
   // Calculate Order Prices
   const itemsPrice = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
+  console.log(shippingInfo);
   const shippingPrice = itemsPrice > 200 ? 0 : 25;
   const taxPrice = Number((0.05 * itemsPrice).toFixed(2));
   const totalPrice = (itemsPrice + shippingPrice + taxPrice).toFixed(2);
@@ -35,14 +36,14 @@ const ConfirmOrder = ({ history }) => {
         <div className="col-12 col-lg-8 mt-5 order-confirm">
           <h4 className="mb-3">Shipping Info</h4>
           <p>
-            <b>Name:</b> {user && user.firstName}
+            <b>Name:</b> {auth.user && auth.user.firstName + auth.user.lastName}
           </p>
           <p>
-            <b>Phone:</b> {shippingInfo.phoneNo}
+            <b>Phone:</b> {shippingInfo.phoneNu}
           </p>
           <p className="mb-4">
             <b>Address:</b>{" "}
-            {`${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.postalCode}, ${shippingInfo.country}`}
+            {`${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.zipCode}`}
           </p>
 
           <hr />
