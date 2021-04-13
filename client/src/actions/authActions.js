@@ -15,6 +15,9 @@ import {
   FORGOT_PASSWORD_REQ,
   FORGOT_PASSWORD_SUCCESS,
   FORGOT_PASSWORD_FAIL,
+  NEW_PASSWORD_REQ,
+  NEW_PASSWORD_SUCCESS,
+  NEW_PASSWORD_FAIL,
 } from "../constants/authConstants";
 
 //Login
@@ -113,7 +116,7 @@ export const forgotPassword = (email) => async (dispatch) => {
 
     const config = {
       headers: {
-        "content-Type": "application/json",
+        "Content-Type": "application/json",
       },
     };
 
@@ -126,6 +129,35 @@ export const forgotPassword = (email) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: FORGOT_PASSWORD_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Reset password
+export const resetPassword = (token, passwords) => async (dispatch) => {
+  try {
+    dispatch({ type: NEW_PASSWORD_REQ });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/password/reset/${token}`,
+      passwords,
+      config
+    );
+
+    dispatch({
+      type: NEW_PASSWORD_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: NEW_PASSWORD_FAIL,
       payload: error.response.data.message,
     });
   }

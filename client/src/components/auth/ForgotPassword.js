@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { forgotPassword, clearErrors } from "../../actions/authActions";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
-  const { error, message, loading } = useSelector(
+  const { error, loading, message } = useSelector(
     (state) => state.forgotPassword
   );
 
@@ -19,8 +20,9 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.set("email", email);
-    dispatch(forgotPassword(formData));
+    formData.append("email", email);
+    console.log(formData.get("email"));
+    dispatch(forgotPassword(formData.getAll("email")));
   };
 
   return (
