@@ -92,6 +92,9 @@ class Register extends React.Component {
                 >
                   Submit
                 </button>
+                <Link className="nav-link" to="/login">
+                  Already have an account?
+              </Link>
               </form>
             </div>
           </div>

@@ -33,10 +33,10 @@ const ConfirmOrder = ({ history }) => {
       <CheckoutSteps shipping confirmOrder />
 
       <div className="row d-flex justify-content-between">
-        <div className="col-12 col-lg-8 mt-5 order-confirm">
-          <h4 className="mb-3">Shipping Info</h4>
+        <div className="col-12 col-lg-8 mt-5 order-confirm" style={{ marginLeft: "25px" }}>
+          <h2 className="mb-3">Shipping Info</h2>
           <p>
-            <b>Name:</b> {auth.user && auth.user.firstName + auth.user.lastName}
+            <b>Name:</b> {auth.user && auth.user.firstName + " " + auth.user.lastName}
           </p>
           <p>
             <b>Phone:</b> {shippingInfo.phoneNu}
@@ -55,7 +55,7 @@ const ConfirmOrder = ({ history }) => {
               <div className="cart-item my-1" key={item.product}>
                 <div className="row">
                   <div className="col-4 col-lg-2">
-                    <img src={item.image} alt="Laptop" height="45" width="65" />
+                    <img src={item.image} alt="Laptop" height="80" width="65" />
                   </div>
 
                   <div className="col-5 col-lg-6">
