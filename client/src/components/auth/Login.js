@@ -30,6 +30,12 @@ const Login = () => {
     dispatch(login(email, password));
   };
 
+  const forgotPass = () => {
+    axios
+      .post(`${serverApi}/api/v1/passowrd/forgot`, email)
+      .then(res => console.log(res))
+  };
+
   return (
     <>
       {loading ? (
@@ -70,6 +76,9 @@ const Login = () => {
                   Log in
                 </button>
               </form>
+              <Link className="nav-link" to="/forgotpass" onClick={forgotPass}>
+                Forgot your password?
+              </Link>
             </div>
           </div>
         </>

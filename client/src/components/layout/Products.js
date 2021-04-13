@@ -7,6 +7,7 @@ import Pagination from "react-js-pagination";
 import Search from "./Search";
 import InfoIcon from '@material-ui/icons/Info';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import RangeSlider from '../helpers/RangeSlider'
 
 const Products = ({ match }) => {
   const dispatch = useDispatch();
@@ -19,10 +20,12 @@ const Products = ({ match }) => {
     resultsPerPage,
   } = useSelector((state) => state.products);
 
+
   const keyword = match.params.keyword;
 
   const [currentPage, setCurrentPage] = useState(1);
   const [category, setCategory] = useState("");
+  const [filter, setFilter] = useState("")
 
   const categories = [
     "Electronics",
@@ -32,13 +35,34 @@ const Products = ({ match }) => {
     "Phones",
   ];
 
+  const handleChange = (e) => {
+    if (filter == e.target.name) return setFilter("")
+    setFilter(e.target.name)
+  }
+
   useEffect(() => {
-    dispatch(getProducts(keyword, currentPage, category));
-  }, [dispatch, keyword, currentPage, category]);
+    dispatch(getProducts(keyword, currentPage));//category
+    // let categoryState = [
+    //   { id: 1, category: "Electronics" },
+    //   { id: 2, category: "Cameras" },
+    //   { id: 3, category: "Laptop" },
+    //   { id: 4, category: "Accessories" },
+    //   { id: 5, category: "Phones" },
+    // ]
+    // setCategoryState(categoryState.map(d => {
+    //   return {
+    //     select: false,
+    //     category: d.category
+    //   }
+    // }))
+  }, [dispatch, keyword, currentPage]); //category
 
   function setCurrentPageNu(pageNumber) {
     setCurrentPage(pageNumber);
   }
+
+  console.log(filter)
+  console.log(products)
   return (
     <>
       {loading ? (
@@ -58,29 +82,42 @@ const Products = ({ match }) => {
                 style={{ marginTop: "15px" }}
               >
                 <h6>Categories</h6>
-                <ul className="pl-0">
-                  {categories.map((category) => (
-                    <li
-                      style={{
-                        cursor: "pointer",
-                        listStyleType: "none",
-                      }}
-                      key={category}
-                      onClick={() => setCategory(category)}
-                    >
-                      {category}
-                    </li>
-                  ))}
-                </ul>
+                <div>
+                  <ul className="pl-0">
+                    {categories.map((category, i) => (
+
+                      <li
+
+                        style={{
+
+                          cursor: "pointer",
+                          listStyleType: "none",
+                        }}
+
+                      // key={d.id}
+
+                      >
+                        <li><input
+                          type="checkbox" style={{ marginRight: "5px" }} name={category} onChange={handleChange}></input>
+                          {category}
+                        </li>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div style={{ marginTop: "50px" }}><RangeSlider />
+                  <button class="btn btn-warning" style={{ marginTop: "50px" }}>Submit Filters</button>
+                </div>
               </div>
+
               <div class="col-md-10" style={{ display: "flex" }}>
                 {products &&
-                  products.map((product) => (
+                  products.filter(itr => !filter ? itr : itr.category == filter).map((product) => (
                     <div
                       className="col-sm-12 col-md-6 col-lg-3 my-3"
                       key={product._id}
                     >
-                      <div className="card p-3 rounded" style={{height:"385px"}}>
+                      <div className="card p-3 rounded" style={{ height: "385px" }}>
                         <img
                           className="card-img-top mx-auto"
                           src={product.images[0].url}
@@ -100,7 +137,7 @@ const Products = ({ match }) => {
                               ({product.numOfReviews})
                             </span>
                           </div>
-                          <p className="card-text">{product.price}</p>
+                          <p className="card-text">{product.price}$</p>
                           <div class="divIcons">
 
                             <Link
@@ -141,7 +178,8 @@ const Products = ({ match }) => {
             />
           </div>
         </>
-      )}
+      )
+      }
     </>
   );
 };
