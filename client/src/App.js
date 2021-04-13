@@ -15,6 +15,8 @@ import Register from "./components/auth/Register";
 import { loadUser } from "./actions/authActions";
 import store from "./store";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import ForgotPassword from "./components/auth/ForgotPassword";
+
 import { useSelector } from "react-redux";
 
 import ProductDetails from "./components/layout/ProductDetails";
@@ -35,6 +37,7 @@ function App() {
         <div className="container">
           <Route exact path="/register" component={() => <Register />} />
           <Route exact path="/login" component={() => <Login />} />
+          <Route exact path="/password/forgot" component={ForgotPassword} />
         </div>
         <ProtectedRoute exact path="/shipping" component={Shipping} />
         <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
