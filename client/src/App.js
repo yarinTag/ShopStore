@@ -14,6 +14,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import { loadUser } from "./actions/authActions";
 import store from "./store";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { useSelector } from "react-redux";
 
 import ProductDetails from "./components/layout/ProductDetails";
@@ -35,12 +36,12 @@ function App() {
           <Route exact path="/register" component={() => <Register />} />
           <Route exact path="/login" component={() => <Login />} />
         </div>
-        <Route exact path="/shipping" component={Shipping} />
-        <Route exact path="/order/confirm" component={ConfirmOrder} />
+        <ProtectedRoute exact path="/shipping" component={Shipping} />
+        <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
         <Route exact path="/products" component={Products} />
         <Route exact path="/products/search/:keyword" component={Products} />
         <Route exact path="/product/:id" component={ProductDetails} />
-        <Route exact path="/cart" component={Cart} />
+        <ProtectedRoute exact path="/cart" component={Cart} />
         <Footer />
       </div>
     </Router>
