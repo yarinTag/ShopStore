@@ -20,7 +20,7 @@ const Products = ({ match }) => {
     resultsPerPage,
   } = useSelector((state) => state.products);
 
-
+  const [rangeValue, setRangeValue] = useState([])
   const keyword = match.params.keyword;
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,7 +34,7 @@ const Products = ({ match }) => {
     "Accessories",
     "Phones",
   ];
-
+  
   const handleChange = (e) => {
     if (filter == e.target.name) return setFilter("")
     setFilter(e.target.name)
@@ -61,8 +61,6 @@ const Products = ({ match }) => {
     setCurrentPage(pageNumber);
   }
 
-  console.log(filter)
-  console.log(products)
   return (
     <>
       {loading ? (
@@ -84,7 +82,7 @@ const Products = ({ match }) => {
                 <h6>Categories</h6>
                 <div>
                   <ul className="pl-0">
-                    {categories.map((category, i) => (
+                    {categories.map((category) => (
 
                       <li
 
@@ -105,14 +103,14 @@ const Products = ({ match }) => {
                     ))}
                   </ul>
                 </div>
-                <div style={{ marginTop: "50px" }}><RangeSlider />
+                <div style={{ marginTop: "50px" }}><RangeSlider setRangeValue={setRangeValue} />
                   <button class="btn btn-warning" style={{ marginTop: "50px" }}>Submit Filters</button>
                 </div>
               </div>
 
               <div class="col-md-10" style={{ display: "flex" }}>
                 {products &&
-                  products.filter(itr => !filter ? itr : itr.category == filter).map((product) => (
+                  products.filter(itr => (itr.price > rangeValue[0] && itr.price < rangeValue[1]) && !filter ? itr : itr.category == filter).map((product) => (
                     <div
                       className="col-sm-12 col-md-6 col-lg-3 my-3"
                       key={product._id}

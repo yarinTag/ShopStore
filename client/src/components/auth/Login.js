@@ -27,6 +27,7 @@ const Login = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (!password || !email) return
     dispatch(login(email, password));
   };
 
@@ -76,9 +77,13 @@ const Login = () => {
                   Log in
                 </button>
               </form>
-              <Link className="nav-link" to="/forgotpass" onClick={forgotPass}>
-                Forgot your password?
+              <div style={{ display: "flex" }}>
+                <Link className="nav-link" to="/forgotpass" onClick={forgotPass}>
+                  Forgot your password?
               </Link>
+              {error!="Login first to access this" ? 
+                <p style={{ color: "red", marginLeft: "80px", marginTop: "8px" }}>{error}</p> : <></> }
+              </div>
             </div>
           </div>
         </>
