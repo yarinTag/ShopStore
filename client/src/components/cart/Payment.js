@@ -50,7 +50,7 @@ const Payment = ({ history }) => {
       };
       order.paymentInfo = {
         id: Math.random(),
-        status: "Deliv",
+        orderStatus: "Delivered",
       };
 
       dispatch(createOrder(order));

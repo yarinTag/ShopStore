@@ -9,6 +9,7 @@ import Products from "./components/layout/Products";
 import Cart from "./components/cart/Cart";
 import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
+import OrdersList from "./components/order/OrdersList";
 
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
@@ -49,6 +50,8 @@ function App() {
         <Route exact path="/products/search/:keyword" component={Products} />
         <Route exact path="/product/:id" component={ProductDetails} />
         <ProtectedRoute exact path="/cart" component={Cart} />
+        <ProtectedRoute exact path="/orders/me" component={OrdersList} />
+
         <Footer />
       </div>
     </Router>

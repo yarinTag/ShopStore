@@ -103,12 +103,15 @@ exports.deleteProduct = catchAsyncErr(async (req, res, next) => {
 });
 
 exports.getProductsCategoryPrice = catchAsyncErr(async (req, res, next) => {
-  const results = await Product.aggregate([{ $match: { price: { $lt: 200 } } }, { $group: { category: '$category' } }])
+  const results = await Product.aggregate([
+    { $match: { price: { $lt: 200 } } },
+    { $group: { category: "$category" } },
+  ]);
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       results,
     },
   });
-})
+});
