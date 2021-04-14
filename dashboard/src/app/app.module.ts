@@ -14,6 +14,8 @@ import { ProductsComponent } from './products/products.component';
 import { OrdersComponent } from './orders/orders.component';
 import {ProductsModule} from './products/products.module'
 import { OrdersModule } from './orders/orders.module';
+import * as axios from 'axios'
+
 
 const routes: Routes = [
   {
