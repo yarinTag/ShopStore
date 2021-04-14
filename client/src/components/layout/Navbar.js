@@ -61,10 +61,10 @@ const Navbar = () => {
               <a class="dropdown-item" href="#">
                 Edit Users
               </a>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="http://localhost:4200/products">
                 Edit Products
               </a>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="http://localhost:4200/orders">
                 Edit Orders
               </a>
               <a class="dropdown-item" href="#">

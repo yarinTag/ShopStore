@@ -14,11 +14,14 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]> {
+    console.log(this.UsersUrl);
+    console.log(this.http.get<User[]>(this.UsersUrl));
+
     return this.http.get<User[]>(this.UsersUrl);
   }
 
   addUser(id: number): Observable<User> {
-    return this.http.post<User>(this.UsersUrl, { id: id });
+    return this.http.post<User>(this.UsersUrl, { _id: id });
   }
 
   getUser(id: number): Observable<User> {

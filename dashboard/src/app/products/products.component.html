@@ -1,1 +1,24 @@
-<p>products works!</p>
+
+<table class="table" id='tab'>
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quntity</th>
+        <th scope="col">Category</th>
+        <th scope="col">Created At</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of products">
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.stock }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.createdAt }}</td>
+        <td class="edit" (click)="onClickEdit(product)" style="color: blue;" >edit</td>
+        <td class="delete" (click)="onDeleteClick(product)" style="color: blue;">delete</td>
+    </tr>
+    </tbody>
+</table>  
