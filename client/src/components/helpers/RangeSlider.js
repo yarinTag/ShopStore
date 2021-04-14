@@ -13,10 +13,10 @@ function valuetext(value) {
     return `${value}`;
 }
 
-export default function RangeSlider() {
+export default function RangeSlider(props) {
     const classes = useStyles();
-    const [value, setValue] = React.useState([20, 37]);
-
+    const [value, setValue] = React.useState([0, 2500]);
+    props.setRangeValue(value)
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -27,6 +27,8 @@ export default function RangeSlider() {
                 Price range
       </Typography>
             <Slider
+                min={0}
+                max={2500}
                 value={value}
                 onChange={handleChange}
                 valueLabelDisplay="auto"
