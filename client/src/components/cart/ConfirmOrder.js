@@ -33,10 +33,14 @@ const ConfirmOrder = ({ history }) => {
       <CheckoutSteps shipping confirmOrder />
 
       <div className="row d-flex justify-content-between">
-        <div className="col-12 col-lg-8 mt-5 order-confirm" style={{ marginLeft: "25px" }}>
+        <div
+          className="col-12 col-lg-8 mt-5 order-confirm"
+          style={{ marginLeft: "25px" }}
+        >
           <h2 className="mb-3">Shipping Info</h2>
           <p>
-            <b>Name:</b> {auth.user && auth.user.firstName + " " + auth.user.lastName}
+            <b>Name:</b>{" "}
+            {auth.user && auth.user.firstName + " " + auth.user.lastName}
           </p>
           <p>
             <b>Phone:</b> {shippingInfo.phoneNu}

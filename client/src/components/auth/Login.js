@@ -31,11 +31,11 @@ const Login = () => {
     dispatch(login(email, password));
   };
 
-  const forgotPass = () => {
-    axios
-      .post(`${serverApi}/api/v1/passowrd/forgot`, email)
-      .then(res => console.log(res))
-  };
+  // const forgotPass = () => {
+  //   axios
+  //     .post(`/api/v1/passowrd/forgot`, email)
+  //     .then((res) => console.log(res));
+  // };
 
   return (
     <>
@@ -77,9 +77,9 @@ const Login = () => {
                   Log in
                 </button>
               </form>
-              <div style={{ display: "flex" }}>
-                <Link className="nav-link" to="/forgotpass" onClick={forgotPass}>
-                  Forgot your password?
+
+              <Link className="nav-link" to="/password/forgot">
+                Forgot your password?
               </Link>
               {error!="Login first to access this" ? 
                 <p style={{ color: "red", marginLeft: "80px", marginTop: "8px" }}>{error}</p> : <></> }
