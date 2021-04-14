@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const ConfirmOrder = ({ history }) => {
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
-  const { auth } = useSelector((state) => state); //TODO
+  const { auth } = useSelector((state) => state);
   // Calculate Order Prices
   const itemsPrice = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,

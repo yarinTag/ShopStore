@@ -16,9 +16,14 @@ const Shipping = ({ history }) => {
 
   const [phoneNu, setPhoneNu] = useState(shippingInfo.phoneNu);
 
-  const [country, setCountry] = useState(shippingInfo.country);
+  const [country, setCountry] = useState("Israel");
 
   const countriesList = Object.values(countries);
+
+  const contryHandle = (e) => {
+    setCountry(e.target.value);
+    console.log(country);
+  };
 
   const dispatch = useDispatch();
 
@@ -90,7 +95,7 @@ const Shipping = ({ history }) => {
                 id="country_field"
                 className="form-control"
                 value={country}
-                onChange={(e) => setCountry(e.target.value)}
+                onChange={contryHandle}
                 required
               >
                 {countriesList.map((country) => (

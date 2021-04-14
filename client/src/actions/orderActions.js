@@ -6,9 +6,9 @@ import {
   CLEAR_ERRORS,
 } from "../constants/orderConstants";
 
-export const createOrder = (order) => async (diapatch, getState) => {
+export const createOrder = (order) => async (dispatch, getState) => {
   try {
-    dispatchEvent({ type: CREATE_ORDER_REQ });
+    dispatch({ type: CREATE_ORDER_REQ });
 
     const config = {
       headers: {
@@ -18,12 +18,12 @@ export const createOrder = (order) => async (diapatch, getState) => {
 
     const { data } = await axios.post("/api/v1/order/new", order, config);
 
-    dispatchEvent({
+    dispatch({
       type: CREATE_ORDER_SUCCESS,
       payload: data,
     });
   } catch (error) {
-    dispatchEvent({
+    dispatch({
       type: CREATE_ORDER_FAIL,
       // payload: response.data.message,
     });

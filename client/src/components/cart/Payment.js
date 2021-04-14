@@ -13,6 +13,8 @@ const Payment = ({ history }) => {
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
   const { error } = useSelector((state) => state.newOrder);
 
+  console.log(cartItems);
+
   useEffect(() => {
     if (error) {
       dispatch(clearErrors());
@@ -30,6 +32,7 @@ const Payment = ({ history }) => {
     order.shippingPrice = orderInfo.shippingPrice;
     order.taxPrice = orderInfo.taxPrice;
     order.totalPrice = orderInfo.totalPrice;
+    order.country = orderInfo.country;
   }
 
   const paymentData = {
