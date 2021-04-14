@@ -18,7 +18,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import NewPassword from "./components/auth/NewPassword";
 import { useSelector } from "react-redux";
-
+import Payment from "./components/cart/Payment";
 import ProductDetails from "./components/layout/ProductDetails";
 import "./App.css";
 
@@ -40,8 +40,11 @@ function App() {
           <Route exact path="/password/forgot" component={ForgotPassword} />
           <Route path="/password/reset/:token" component={NewPassword} exact />
         </div>
+
         <ProtectedRoute exact path="/shipping" component={Shipping} />
         <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
+        <ProtectedRoute exact path="/payment" component={Payment} />
+
         <Route exact path="/products" component={Products} />
         <Route exact path="/products/search/:keyword" component={Products} />
         <Route exact path="/product/:id" component={ProductDetails} />
