@@ -77,12 +77,13 @@ const Login = () => {
                   Log in
                 </button>
               </form>
-
+              <div>
               <Link className="nav-link" to="/password/forgot">
                 Forgot your password?
               </Link>
               {error!="Login first to access this" ? 
                 <p style={{ color: "red", marginLeft: "80px", marginTop: "8px" }}>{error}</p> : <></> }
+                
               </div>
             </div>
           </div>
