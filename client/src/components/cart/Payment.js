@@ -66,10 +66,10 @@ const Payment = ({ history }) => {
     <>
       <CheckoutSteps shipping confirmOrder payment />
 
-      <div className="row wrapper">
-        <div className="col-10 col-lg-5">
-          <form className="shadow-lg" onSubmit={submitHandler}>
-            <h1 className="mb-4">Card Info</h1>
+      <div>
+        <div className="col-10 col-lg-5" style={{ marginLeft: "430px" }}>
+          <form className="" onSubmit={submitHandler}>
+            <h1 className="mb-4" style={{ marginLeft: "170px" }}>Card Info</h1>
             <div className="form-group">
               <label htmlFor="card_num_field">Card Number</label>
               <input type="text" id="card_num_field" className="form-control" />
@@ -85,8 +85,8 @@ const Payment = ({ history }) => {
               <input type="text" id="card_cvc_field" className="form-control" />
             </div>
 
-            <button id="pay_btn" type="submit" className="btn btn-block py-3">
-              Pay {` - ${orderInfo && orderInfo.totalPrice}`}
+            <button id="pay_btn" type="submit" className="btn btn-warning" style={{ marginLeft: "230px" }}>
+              Pay {` - ${orderInfo && orderInfo.totalPrice}$`}
             </button>
           </form>
         </div>
