@@ -5,6 +5,8 @@ import { ProductService } from '../services/product.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { getLocaleDateFormat } from '@angular/common';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-products',
@@ -21,9 +23,11 @@ export class ProductsComponent {
   products : Product[] = [];  
   li:any;
   lis=[];
-  constructor(private http : HttpClient, private productService:ProductService ){
-      
+  constructor(private http : HttpClient, private productService:ProductService ,private sharedService:SharedService){
+
 }
+
+
 onClickEdit(product: Product):void{
   this.productService.updateProduct(product);
 }
@@ -45,15 +49,16 @@ ngOnInit(): void {
     if(Response){  
       hideloader();
     }
-    this.li=Response.products;  
+    this.li=Response.products;
+      
     this.products=this.li
-    
+    this.sharedService.sendClickEvent(this.products)
   });
   function hideloader(){
     document.getElementById('loading')}
+
  }
 
+
 }
-
-
 
