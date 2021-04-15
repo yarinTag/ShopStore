@@ -14,7 +14,12 @@ import { ProductsComponent } from './products/products.component';
 import { OrdersComponent } from './orders/orders.component';
 import {ProductsModule} from './products/products.module'
 import { OrdersModule } from './orders/orders.module';
-import * as axios from 'axios'
+import * as axios from 'axios';
+import { BarComponent } from './statistic/bar/bar.component';
+import { PieComponent } from './statistic/pie/pie.component';
+import { ScatterComponent } from './statistic/scatter/scatter.component';
+import { StatisticsComponent } from './statistic/statistics/statistics.component'
+import { StatisticsModule } from './statistic/statistics/statistics.module';
 
 
 const routes: Routes = [
@@ -42,7 +47,8 @@ const routes: Routes = [
     AppRoutingModule,
     BrowserAnimationsModule,
     ProductsModule,
-    OrdersModule
+    OrdersModule,
+    StatisticsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
