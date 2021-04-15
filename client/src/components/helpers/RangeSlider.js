@@ -24,7 +24,7 @@ export default function RangeSlider(props) {
     return (
         <div className={classes.root}>
             <Typography id="range-slider" gutterBottom>
-                Price range
+                Choose Price range
       </Typography>
             <Slider
                 min={0}

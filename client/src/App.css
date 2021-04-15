@@ -15,6 +15,19 @@ img {
   padding-top: 80px;
 }
 
+#avatar {
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1;
+  vertical-align: middle;
+  background-color: var(--color-avatar-bg);
+  border-radius: 6px;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px var(--color-avatar-border);
+  border-radius: 50%!important;
+  width: 250px;
+  height: 250px
+}
 .dark-overlay {
   background-color: rgba(0, 0, 0, 0.7);
   position: absolute;

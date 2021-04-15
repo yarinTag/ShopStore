@@ -34,7 +34,7 @@ const Products = ({ match }) => {
     "Accessories",
     "Phones",
   ];
-  
+
   const handleChange = (e) => {
     if (filter == e.target.name) return setFilter("")
     setFilter(e.target.name)
@@ -42,19 +42,7 @@ const Products = ({ match }) => {
 
   useEffect(() => {
     dispatch(getProducts(keyword, currentPage));//category
-    // let categoryState = [
-    //   { id: 1, category: "Electronics" },
-    //   { id: 2, category: "Cameras" },
-    //   { id: 3, category: "Laptop" },
-    //   { id: 4, category: "Accessories" },
-    //   { id: 5, category: "Phones" },
-    // ]
-    // setCategoryState(categoryState.map(d => {
-    //   return {
-    //     select: false,
-    //     category: d.category
-    //   }
-    // }))
+
   }, [dispatch, keyword, currentPage]); //category
 
   function setCurrentPageNu(pageNumber) {
@@ -104,11 +92,10 @@ const Products = ({ match }) => {
                   </ul>
                 </div>
                 <div style={{ marginTop: "50px" }}><RangeSlider setRangeValue={setRangeValue} />
-                  <button class="btn btn-warning" style={{ marginTop: "50px" }}>Submit Filters</button>
                 </div>
               </div>
 
-              <div class="col-md-10" style={{ display: "flex" }}>
+              <div class="col-md-10" style={{ display: "flex", flexWrap: "inherit" }}>
                 {products &&
                   products.filter(itr => (itr.price > rangeValue[0] && itr.price < rangeValue[1]) && !filter ? itr : itr.category == filter).map((product) => (
                     <div
@@ -122,20 +109,21 @@ const Products = ({ match }) => {
                           height="150px"
                         />
                         <div className="card-body d-flex flex-column">
-                          <h5 className="card-title">
-                            <Link to={`/product/${product._id}`}>
+                          <h5 className="card-title" >
+                            <Link to={`/product/${product._id}`} style={{ maxBlockSize: "180px" }}>
                               {product.name}
+
                             </Link>
                           </h5>
                           <div className="ratings mt-auto">
                             <div className="rating-outer">
                               <div className="rating-inner"></div>
                             </div>
-                            <span id="no_of_reviews">
-                              ({product.numOfReviews})
+                            <span id="no_of_reviews" style={{ color: "red" }}>
+                              {product.stock != 0 ? <p> {product.stock} Procuts Left </p> : <p>Out of Stock </p>}
                             </span>
                           </div>
-                          <p className="card-text">{product.price}$</p>
+                          <p className="card-text" style={{ color: "blue" }}>{product.price}$</p>
                           <div class="divIcons">
 
                             <Link
