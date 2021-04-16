@@ -127,8 +127,8 @@ const Navbar = () => {
 
 // class Navbar extends Component {
 //   handleSignOut = () => {
-//     if (localStorage.getItem("token")) this.props.handleLogin("user");
-//     localStorage.removeItem("token");
+    // if (localStorage.getItem("token")) this.props.handleLogin("user");
+    // localStorage.removeItem("token");
 //   };
 
 //   render() {
