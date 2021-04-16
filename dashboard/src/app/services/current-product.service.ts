@@ -17,9 +17,7 @@ export class CurrentProductService {
 
   changeCurrentProduct(product: Product) {
     this.source.next(product);
-    this.pro=product
-    console.log(product);
-    
+    this.pro=product    
   }
 
   getCurrentProduct():Product{

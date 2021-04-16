@@ -1,0 +1,11 @@
+<p>Edit Order Status</p>
+
+<label for="OrderName">Order Status: {{order.orderStatus}}</label>
+<h1> </h1>
+
+<input [(ngModel)]="Ostatus" id="OrderName" [value]="Ostatus" (input)="Ostatus=$event.target.value" >
+<h1></h1>
+
+
+
+<button (click)="onClick()" [routerLink]="'/orders'" >Submit</button>
