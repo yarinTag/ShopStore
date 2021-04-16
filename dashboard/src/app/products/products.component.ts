@@ -36,12 +36,12 @@ export class ProductsComponent {
 
 onClickEdit(product: Product):void{
   this.current.changeCurrentProduct(product);
-
 }
 
 onDeleteClick(product: Product):void{
   const url = `${environment.ProductDeleteUrl}/${product._id}`
-  // this.http.delete(url).subscribe(() => this.status = 'Delete successful');
+  this.http.delete(url).subscribe(() => this.status = 'Delete successful');
+  window.location.reload();
 }
 
 

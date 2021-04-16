@@ -6,7 +6,7 @@
         <th scope="col">Total Price</th>
         <th scope="col">Created At</th>
         <th scope="col">Current Order Status</th>
-        <th scope="col">Change Status to</th>
+        <th scope="col">Change Status</th>
         <th scope="col"></th>
         <th scope="col"></th>
     </tr>
@@ -18,9 +18,9 @@
         <td>{{ order.totalPrice }}</td>
         <td>{{ order.createdAt }}</td>
         <td >{{ order.orderStatus }}</td>
-        <input [(ngModel)]="title">
-        <td class="edit" (click)="onClickEdit(product)" style="color: blue;" >edit</td>
-        <td class="delete" (click)="onDeleteClick(product)" style="color: blue;">delete</td>
+        <input [(ngModel)]="Ostatus" id="OrderName" value={{order.orderStatus}} (input)="Ostatus=$event.target.value" >
+        <td class="edit" (click)="onClickEdit(order)" style="color: blue;" >edit</td>
+        <td class="delete" (click)="onDeleteClick(order)" style="color: blue;">delete</td>
     </tr>
     </tbody>
 </table>  

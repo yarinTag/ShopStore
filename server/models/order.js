@@ -40,7 +40,6 @@ const orderSchema = mongoose.Schema({
       },
       image: {
         type: String,
-        required: true,
       },
       price: {
         type: Number,
@@ -87,8 +86,8 @@ const orderSchema = mongoose.Schema({
   },
   orderStatus: {
     type: String,
-    required: true,
     default: "On Process",
+    // required: true,
   },
   deliveredAt: {
     type: Date,

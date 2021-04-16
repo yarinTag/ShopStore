@@ -1,5 +1,6 @@
 
 export interface Order {
+    _id: any;
     shippingInfo: [{ address:String,
     city:String, 
     zipCode: String,

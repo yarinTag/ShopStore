@@ -11,8 +11,12 @@ import { CurrentOrderService } from 'src/app/services/current-order.service';
 })
 export class OrdersComponent implements OnInit {
   OrderUrl= environment.OrderUrl;
+  OrderDelete= environment.OrderDeleteUrl;
+  url=environment.EditOrderUrl
+
   li:any;
   orders=[];
+  status: string;
   constructor(private http : HttpClient, private current:CurrentOrderService ){}
   ngOnInit(): void {
         
@@ -29,6 +33,26 @@ export class OrdersComponent implements OnInit {
     this.current.changeCurrentOrder(order);
     console.log(order);
     
+  }
+  Ostatus:String
+
+  onClickEdit(order: Order):void{
+    this.current.changeCurrentOrder(order);
+    // this.Ostatus= order.orderStatus
+    if(order.orderStatus==='Delivered'){
+      return
+    }
+    if(this.Ostatus!==order.orderStatus){
+      order.orderStatus=this.Ostatus
+    } 
+    this.http.put(this.url+order._id,order).subscribe(() => this.status = 'Edit successful');
+  }
+  
+  onDeleteClick(order: Order):void{
+    const url = `${environment.OrderDeleteUrl}${order._id}`
+    console.log(url);
+    this.http.delete(url).subscribe(() => this.status = 'Delete successful');
+    window.location.reload();
   }
 
 }

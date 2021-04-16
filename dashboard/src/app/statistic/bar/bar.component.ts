@@ -69,7 +69,7 @@ private getData(): void {
        {"Framework": "phones", "Stars": this.phones},
        {"Framework": "cameras", "Stars": this.cameras}
   ]  
-  this.sum=this.electronic+this.accessories+this.laptop+this.phones+this.cameras
+  this.sum=Math.max(this.electronic,this.accessories,this.laptop,this.phones,this.cameras);
 }
 private drawBars(data: any[]): void {
   // Create the X-axis band scale

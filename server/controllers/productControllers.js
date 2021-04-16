@@ -61,7 +61,6 @@ exports.updateProduct = catchAsyncErr(async (req, res, next) => {
   // }catch {
   //     return next(new ErrorHandler('Product not found',404));
   // }
-  console.log(req.body)
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
   }

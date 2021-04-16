@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, Output } from '@angular/core';
-import { Product } from 'models/product';
+import { Component, OnInit } from '@angular/core';
 import { CurrentProductService } from 'src/app/services/current-product.service';
 import { environment } from 'src/environments/environment';
 
@@ -40,7 +39,6 @@ onClick():void{
   if(this.category!==this.product.category){
     this.product.category=this.category
   }
-  console.log(this.product.price);
   this.http.put(this.url+'/'+this.product._id,this.product).subscribe(() => this.status = 'Edit successful');
 }
 
