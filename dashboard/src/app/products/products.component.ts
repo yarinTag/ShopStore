@@ -25,6 +25,7 @@ export class ProductsComponent {
   ProductDelete= environment.ProductDelete;
   li:any;
   lis=[];
+  status: string;
   constructor(private http : HttpClient,
      private productService:ProductService ,
      private sharedService:SharedService,
@@ -39,11 +40,9 @@ onClickEdit(product: Product):void{
 }
 
 onDeleteClick(product: Product):void{
-  const url = `${this.ProductDelete}/${product._id}`
-  
-  this.http.delete(url).subscribe(data => {
-    })
-    }
+  const url = `${environment.ProductDeleteUrl}/${product._id}`
+  // this.http.delete(url).subscribe(() => this.status = 'Delete successful');
+}
 
 
 ngOnInit(): void {
@@ -51,15 +50,15 @@ ngOnInit(): void {
   this.http.get(this.ProductsUrl)
   .subscribe(Response => {    
     this.li=Response;
-      
     this.products=this.li.products
-    console.log(this.products);
-
     this.sharedService.sendClickEvent(this.products)
   });
 
- }
 
+ }
+ load():void{
+    this.ngOnInit()
+}
 
 }
 

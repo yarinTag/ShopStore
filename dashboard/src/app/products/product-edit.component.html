@@ -16,6 +16,6 @@
 <label for="ProductCategory">Product Category: {{product.category}}</label>
 <h1> </h1>
 <input [(ngModel)]="category" id="ProductCategory" [value]="category" (input)="category=$event.target.value">
+<h1> </h1>
 
-
-<button (click)="onClick()">Submit</button>
+<button (click)="onClick()" [routerLink]="'/products'" >Submit</button>
