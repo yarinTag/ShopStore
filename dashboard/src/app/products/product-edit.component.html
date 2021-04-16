@@ -1,0 +1,21 @@
+<p>Edit Product</p>
+
+<label for="ProductName">Product Name: {{product.name}}</label>
+<h1> </h1>
+
+<input [(ngModel)]="name" id="ProductName" [value]="name" (input)="name=$event.target.value" >
+<h1></h1>
+<label for="ProductPrice">Product Price: {{product.price}}</label> 
+<h1> </h1>
+<input [(ngModel)]="price" id="ProductPrice" [value]="price" (input)="price=$event.target.value">
+<h1></h1>
+<label for="ProductQuntity">Product Quntity: {{product.stock}}</label> 
+<h1> </h1>
+<input [(ngModel)]="stock" id="ProductQuntity" [value]="stock" (input)="stock=$event.target.value">
+<h1> </h1>
+<label for="ProductCategory">Product Category: {{product.category}}</label>
+<h1> </h1>
+<input [(ngModel)]="category" id="ProductCategory" [value]="category" (input)="category=$event.target.value">
+
+
+<button (click)="onClick()">Submit</button>

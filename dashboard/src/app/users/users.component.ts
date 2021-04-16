@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from 'models/user';
-import { UsersService } from '../services/users.service';
+import { UsersService } from '../services/users2.service';
 import { CurrentUserService } from '../services/current-user.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -17,19 +17,18 @@ export class UsersComponent {
  
   UserUrl= environment.UserUrl;
 
-  users : User[] = [];  
+  users = [];  
   li:any;
 
   constructor(private usersService : UsersService, 
               private currentUserService: CurrentUserService,private http : HttpClient){}
 
   ngOnInit() {
-    console.log(this.UserUrl);
     
     this.http.get(this.UserUrl)
     .subscribe(Response => {
-      this.li=Response;        
-      this.users=this.li
+      this.li= Response;  
+      this.users=this.li.users
     });  }
 
   load(){

@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Product } from 'models/product';
 import { ProductService } from '../services/product.service';
 // import { CurrentUserService } from '../services/current-user.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { getLocaleDateFormat } from '@angular/common';
 import { SharedService } from '../services/shared.service';
+import { CurrentProductService } from '../services/current-product.service';
+
+
 
 @Component({
   selector: 'app-products',
@@ -17,19 +19,23 @@ import { SharedService } from '../services/shared.service';
 
 @Injectable()
 export class ProductsComponent {
- 
+  products : Product[] = [];  
+
   ProductsUrl= environment.ProductUrl;
   ProductDelete= environment.ProductDelete;
-  products : Product[] = [];  
   li:any;
   lis=[];
-  constructor(private http : HttpClient, private productService:ProductService ,private sharedService:SharedService){
+  constructor(private http : HttpClient,
+     private productService:ProductService ,
+     private sharedService:SharedService,
+     private current:CurrentProductService){
 
 }
 
 
 onClickEdit(product: Product):void{
-  this.productService.updateProduct(product);
+  this.current.changeCurrentProduct(product);
+
 }
 
 onDeleteClick(product: Product):void{
@@ -43,12 +49,10 @@ onDeleteClick(product: Product):void{
 ngOnInit(): void {
 
   this.http.get(this.ProductsUrl)
-  .subscribe(Response => {
-    console.log(Response[2]);
-    
-    this.li=Response.products;
+  .subscribe(Response => {    
+    this.li=Response;
       
-    this.products=this.li
+    this.products=this.li.products
     console.log(this.products);
 
     this.sharedService.sendClickEvent(this.products)
@@ -58,4 +62,5 @@ ngOnInit(): void {
 
 
 }
+
 
