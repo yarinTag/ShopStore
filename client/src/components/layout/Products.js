@@ -64,7 +64,9 @@ const Products = ({ match }) => {
             className="container container-fluid"
             style={{ marginLeft: "20px" }}
           >
-            <h1 id="products_heading">Latest Products</h1>
+            <h1 id="products_heading" className="products_heading">
+              Latest Products
+            </h1>
             <div>
               <Route render={({ history }) => <Search history={history} />} />
             </div>
@@ -120,6 +122,7 @@ const Products = ({ match }) => {
                     )
                     .map((product) => (
                       <div
+                        id="all_product"
                         className="col-sm-12 col-md-6 col-lg-3 my-3"
                         key={product._id}
                       >

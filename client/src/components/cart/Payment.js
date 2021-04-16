@@ -3,23 +3,29 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder, clearErrors } from "../../actions/orderActions";
 import CheckoutSteps from "./CheckoutSteps";
+import { useAlert } from "react-alert";
 
 import axios from "axios";
 
 const Payment = ({ history }) => {
   const dispatch = useDispatch();
 
+  const alert = useAlert();
+
   const { user } = useSelector((state) => state.auth);
+
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
+
   const { error } = useSelector((state) => state.newOrder);
 
   console.log(cartItems);
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, error]);
+  }, [dispatch, alert, error]);
 
   const order = {
     orderItems: cartItems,
@@ -58,7 +64,7 @@ const Payment = ({ history }) => {
       history.push("/success");
     } catch (error) {
       document.querySelector("#pay_btn").disabled = false;
-      //error(error.response.data.message);
+      alert.error(error.response.data.message);
     }
   };
 
