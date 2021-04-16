@@ -16,11 +16,12 @@ import { environment } from 'src/environments/environment';
 export class UsersComponent {
  
   UserUrl= environment.UserUrl;
+  url=environment.EditUserUrl
 
   users = [];  
   li:any;
 
-  constructor(private usersService : UsersService, 
+  constructor(private usersService : UsersService, private current:CurrentUserService,
               private currentUserService: CurrentUserService,private http : HttpClient){}
 
   ngOnInit() {
@@ -30,6 +31,25 @@ export class UsersComponent {
       this.li= Response;  
       this.users=this.li.users
     });  }
+
+    userRole:String
+
+    onClickEdit(user: User):void{
+      this.current.changeCurrentUser(user);
+      if(this.userRole!==user.role){
+        user.role=this.userRole
+      } 
+      this.http.put(this.url+'/'+user._id,user).subscribe(() => status = 'Edit successful');
+    }
+    
+    onDeleteClick(user: User):void{
+      const url = `${environment.DeleteUserUrl}${user._id}`
+      console.log(url);
+      
+      this.http.delete(url).subscribe(() => status = 'Delete successful');
+      window.location.reload();
+    }
+  
 
   load(){
     this.usersService.getUsers().subscribe(data => {

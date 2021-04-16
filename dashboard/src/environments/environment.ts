@@ -13,6 +13,8 @@ export const environment = {
   ProductDeleteUrl:'http://localhost:4000/api/v1/product/delete',
   OrderDeleteUrl:"http://localhost:4000/api/v1/order/delete/",
   EditOrderUrl:"http://localhost:4000/api/v1/order/edit/",
+  EditUserUrl:"http://localhost:4000/api/v1/user/edit/",
+  DeleteUserUrl:"http://localhost:4000/api/v1/user/delete/",
 
 };
 

@@ -5,6 +5,7 @@
       <th scope="col">Email</th>
       <th scope="col">Role</th>
       <th scope="col">Created At</th>
+      <th scope="col">Change User Role</th>
       <th scope="col"></th>
       <th scope="col"></th>
     </tr>
@@ -15,8 +16,9 @@
       <td>{{ user.email }}</td>
       <td>{{ user.role }}</td>
       <td>{{ user.createdAt }}</td>
-      <td class="edit" (click)="onClickEdit(product)" style="color: blue;">Edit</td>
-      <td class="delete" (click)="onDeleteClick(product)" style="color: blue;">Delete</td>
+      <input [(ngModel)]="userRole" id="UserRole" value={{user.role}} (input)="userRole=$event.target.value" >
+      <td class="edit" (click)="onClickEdit(user)" style="color: blue;">Edit</td>
+      <td class="delete" (click)="onDeleteClick(user)" style="color: blue;">Delete</td>
     </tr>
   </tbody>
 </table>
