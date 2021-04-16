@@ -3,6 +3,8 @@ import { User } from 'models/user';
 import { UsersService } from '../services/users.service';
 import { CurrentUserService } from '../services/current-user.service';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-users',
@@ -13,15 +15,22 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class UsersComponent {
  
+  UserUrl= environment.UserUrl;
 
   users : User[] = [];  
+  li:any;
 
   constructor(private usersService : UsersService, 
-              private currentUserService: CurrentUserService){}
+              private currentUserService: CurrentUserService,private http : HttpClient){}
 
   ngOnInit() {
-    this.load();
-  }
+    console.log(this.UserUrl);
+    
+    this.http.get(this.UserUrl)
+    .subscribe(Response => {
+      this.li=Response;        
+      this.users=this.li
+    });  }
 
   load(){
     this.usersService.getUsers().subscribe(data => {
