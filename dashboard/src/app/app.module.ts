@@ -22,6 +22,7 @@ import { StatisticsComponent } from './statistic/statistics/statistics.component
 import { StatisticsModule } from './statistic/statistics/statistics.module';
 import { ProductEditModule } from './products/product-edit.module';
 import { OrderEditModule } from './orders/order-edit.module';
+import { UserEditModule } from './users/user-edit.module';
 
 
 const routes: Routes = [
@@ -53,6 +54,7 @@ const routes: Routes = [
     StatisticsModule,
     ProductEditModule,
     OrderEditModule,
+    UserEditModule,
 
   ],
   providers: [],

@@ -3,8 +3,8 @@
     color: #ffffff;
     width: 380px;
     padding-left: 20px;
-    height: 100vh;
-    background-image: linear-gradient(30deg, #000, #bbb);
+    height: 100%;
+    background-image: linear-gradient(60deg, rgb(56, 140, 209), rgb(105, 66, 110));
     border-top-right-radius: 90px;
   }
 
