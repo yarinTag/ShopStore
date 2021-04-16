@@ -28,7 +28,7 @@
     "rxjs": "6.6.7",
     "rxjs-compat": "^6.6.7",
     "simple-sidenav": "^1.1.5",
-    "sweetalert2": "^10.16.2",
+    "sweetalert2": "^10.16.3",
     "zone.js": "0.11.4"
   },
   "scripts": {
