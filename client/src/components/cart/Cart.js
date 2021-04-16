@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart, removeItemFromCart } from "../../actions/cartActions";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { useAlert } from "react-alert";
 
 const Cart = ({ history }) => {
   const dispatch = useDispatch();
+  const alert = useAlert();
 
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
 
   const removeCartItemHandler = (id) => {
+    alert.success("Item Removed from cart");
     dispatch(removeItemFromCart(id));
   };
 

@@ -4,15 +4,17 @@ import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../actions/authActions";
+import { useAlert } from "react-alert";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-
+  const alert = useAlert();
   const { user, loading } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
 
   const handleSignOut = () => {
     dispatch(logOut());
+    alert.success("You Logged Out");
   };
   console.log(user);
 
@@ -127,8 +129,8 @@ const Navbar = () => {
 
 // class Navbar extends Component {
 //   handleSignOut = () => {
-    // if (localStorage.getItem("token")) this.props.handleLogin("user");
-    // localStorage.removeItem("token");
+// if (localStorage.getItem("token")) this.props.handleLogin("user");
+// localStorage.removeItem("token");
 //   };
 
 //   render() {

@@ -2,17 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { forgotPassword, clearErrors } from "../../actions/authActions";
+import { useAlert } from "react-alert";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
+
   const dispatch = useDispatch();
-  const { error, loading, message } = useSelector(
+
+  const alert = useAlert();
+
+  const { error, loading, message, success } = useSelector(
     (state) => state.forgotPassword
   );
 
   useEffect(() => {
     if (error) {
-      dispatch(clearErrors);
+      alert.error(error);
+      dispatch(clearErrors());
+    } else if (message) {
+      alert.success("Look at your Email");
     }
   }, [dispatch, error, message]);
 
@@ -21,7 +29,7 @@ const ForgotPassword = () => {
 
     const formData = new FormData();
     formData.append("email", email);
-    console.log(formData.get("email"));
+    // console.log(formData.get("email"));
     dispatch(forgotPassword(formData.getAll("email")));
   };
 
@@ -38,6 +46,7 @@ const ForgotPassword = () => {
                 id="email_field"
                 className="form-control"
                 value={email}
+                required
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>

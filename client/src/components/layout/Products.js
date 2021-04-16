@@ -8,9 +8,11 @@ import Search from "./Search";
 import InfoIcon from "@material-ui/icons/Info";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import RangeSlider from "../helpers/RangeSlider";
+import { useAlert } from "react-alert";
 
 const Products = ({ match }) => {
   const dispatch = useDispatch();
+  const alert = useAlert();
   //Pull the products from the state
   const {
     loading,
@@ -42,7 +44,11 @@ const Products = ({ match }) => {
 
   useEffect(() => {
     dispatch(getProducts(keyword, currentPage)); //category
-  }, [dispatch, keyword, currentPage]); //category
+
+    if (error) {
+      return alert.error(error);
+    }
+  }, [dispatch, keyword, currentPage, alert, error]); //category
 
   function setCurrentPageNu(pageNumber) {
     setCurrentPage(pageNumber);

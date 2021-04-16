@@ -4,11 +4,13 @@ import { Carousel } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, clearErrors } from "../../actions/productActions";
 import { addItemToCart } from "../../actions/cartActions";
+import { useAlert } from "react-alert";
 
 const ProductDetails = ({ match }) => {
   const [quantity, setQuantity] = useState(1);
 
   const dispatch = useDispatch();
+  const alert = useAlert();
 
   const { loading, error, product } = useSelector(
     (state) => state.productDetails
@@ -18,7 +20,8 @@ const ProductDetails = ({ match }) => {
     dispatch(getProductDetails(match.params.id));
 
     if (error) {
-      dispatch(clearErrors);
+      alert.error(error);
+      dispatch(clearErrors());
     }
   }, [dispatch, error, match.params.id]);
 
@@ -41,6 +44,7 @@ const ProductDetails = ({ match }) => {
   };
 
   const addToCart = () => {
+    alert.success("Product Added To Cart");
     dispatch(addItemToCart(match.params.id, quantity));
   };
 

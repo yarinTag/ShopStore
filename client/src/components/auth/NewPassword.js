@@ -2,21 +2,25 @@ import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword, clearErrors } from "../../actions/authActions";
+import { useAlert } from "react-alert";
 
 const NewPassword = ({ history, match }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
+  const alert = useAlert();
 
   const { error, success } = useSelector((state) => state.forgotPassword);
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (success) {
+      alert.success("Password Change");
       history.push("/login");
     }
   }, [dispatch, alert, error, success, history]);

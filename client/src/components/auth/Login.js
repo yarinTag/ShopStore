@@ -5,12 +5,14 @@ import { serverApi } from "../../config";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { login, clearErrors } from "../../actions/authActions";
 import Loader from "../layout/Loader";
+import { useAlert } from "react-alert";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let history = useHistory();
   const dispatch = useDispatch();
+  const alert = useAlert();
 
   const { isAuthenticated, error, loading } = useSelector(
     (state) => state.auth
@@ -19,15 +21,17 @@ const Login = () => {
   useEffect(() => {
     if (isAuthenticated) {
       history.push("/products");
+      alert.success("You Logged In");
     }
     if (error) {
-      dispatch(clearErrors);
+      alert.error(error);
+      dispatch(clearErrors());
     }
-  }, [dispatch, isAuthenticated, error, history]);
+  }, [dispatch, alert, isAuthenticated, error, history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!password || !email) return
+    if (!password || !email) return;
     dispatch(login(email, password));
   };
 
@@ -78,12 +82,22 @@ const Login = () => {
                 </button>
               </form>
               <div>
-              <Link className="nav-link" to="/password/forgot">
-                Forgot your password?
-              </Link>
-              {error!="Login first to access this" ? 
-                <p style={{ color: "red", marginLeft: "80px", marginTop: "8px" }}>{error}</p> : <></> }
-                
+                <Link className="nav-link" to="/password/forgot">
+                  Forgot your password?
+                </Link>
+                {error != "Login first to access this" ? (
+                  <p
+                    style={{
+                      color: "red",
+                      marginLeft: "80px",
+                      marginTop: "8px",
+                    }}
+                  >
+                    {error}
+                  </p>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>
