@@ -20,4 +20,5 @@ router.delete('/admin/product/:id', isAuthenticated, authorizeRoles('admin'), de
 router.get('/products/getcategoryprice', getProductsCategoryPrice)
 
 
+
 module.exports = router;

@@ -5,9 +5,9 @@ import { Link, Route } from "react-router-dom";
 import Loader from "./Loader";
 import Pagination from "react-js-pagination";
 import Search from "./Search";
-import InfoIcon from '@material-ui/icons/Info';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import RangeSlider from '../helpers/RangeSlider'
+import InfoIcon from "@material-ui/icons/Info";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import RangeSlider from "../helpers/RangeSlider";
 
 const Products = ({ match }) => {
   const dispatch = useDispatch();
@@ -20,12 +20,12 @@ const Products = ({ match }) => {
     resultsPerPage,
   } = useSelector((state) => state.products);
 
-  const [rangeValue, setRangeValue] = useState([])
+  const [rangeValue, setRangeValue] = useState([]);
   const keyword = match.params.keyword;
 
   const [currentPage, setCurrentPage] = useState(1);
   const [category, setCategory] = useState("");
-  const [filter, setFilter] = useState("")
+  const [filter, setFilter] = useState("");
 
   const categories = [
     "Electronics",
@@ -36,13 +36,12 @@ const Products = ({ match }) => {
   ];
 
   const handleChange = (e) => {
-    if (filter == e.target.name) return setFilter("")
-    setFilter(e.target.name)
-  }
+    if (filter == e.target.name) return setFilter("");
+    setFilter(e.target.name);
+  };
 
   useEffect(() => {
-    dispatch(getProducts(keyword, currentPage));//category
-
+    dispatch(getProducts(keyword, currentPage)); //category
   }, [dispatch, keyword, currentPage]); //category
 
   function setCurrentPageNu(pageNumber) {
@@ -55,7 +54,10 @@ const Products = ({ match }) => {
         <Loader />
       ) : (
         <>
-          <div className="container container-fluid" style={{ marginLeft: "20px" }}>
+          <div
+            className="container container-fluid"
+            style={{ marginLeft: "20px" }}
+          >
             <h1 id="products_heading">Latest Products</h1>
             <div>
               <Route render={({ history }) => <Search history={history} />} />
@@ -71,81 +73,105 @@ const Products = ({ match }) => {
                 <div>
                   <ul className="pl-0">
                     {categories.map((category) => (
-
                       <li
-
                         style={{
-
                           cursor: "pointer",
                           listStyleType: "none",
                         }}
 
-                      // key={d.id}
-
+                        // key={d.id}
                       >
-                        <li><input
-                          type="checkbox" style={{ marginRight: "5px" }} name={category} onChange={handleChange}></input>
+                        <li>
+                          <input
+                            type="checkbox"
+                            style={{ marginRight: "5px" }}
+                            name={category}
+                            onChange={handleChange}
+                          ></input>
                           {category}
                         </li>
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div style={{ marginTop: "50px" }}><RangeSlider setRangeValue={setRangeValue} />
+                <div style={{ marginTop: "50px" }}>
+                  <RangeSlider setRangeValue={setRangeValue} />
                 </div>
               </div>
 
-              <div class="col-md-10" style={{ display: "flex", flexWrap: "inherit" }}>
+              <div
+                class="col-md-10"
+                style={{ display: "flex", flexWrap: "inherit" }}
+              >
                 {products &&
-                  products.filter(itr => (itr.price > rangeValue[0] && itr.price < rangeValue[1]) && !filter ? itr : itr.category == filter).map((product) => (
-                    <div
-                      className="col-sm-12 col-md-6 col-lg-3 my-3"
-                      key={product._id}
-                    >
-                      <div className="card p-3 rounded" style={{ height: "385px" }}>
-                        <img
-                          className="card-img-top mx-auto"
-                          src={product.images[0].url}
-                          height="150px"
-                        />
-                        <div className="card-body d-flex flex-column">
-                          <h5 className="card-title" >
-                            <Link to={`/product/${product._id}`} style={{ maxBlockSize: "180px" }}>
-                              {product.name}
-
-                            </Link>
-                          </h5>
-                          <div className="ratings mt-auto">
-                            <div className="rating-outer">
-                              <div className="rating-inner"></div>
+                  products
+                    .filter((itr) =>
+                      itr.price > rangeValue[0] &&
+                      itr.price < rangeValue[1] &&
+                      !filter
+                        ? itr
+                        : itr.category == filter
+                    )
+                    .map((product) => (
+                      <div
+                        className="col-sm-12 col-md-6 col-lg-3 my-3"
+                        key={product._id}
+                      >
+                        <div
+                          className="card p-3 rounded"
+                          style={{ height: "385px" }}
+                        >
+                          <img
+                            className="card-img-top mx-auto"
+                            src={product.images[0].url}
+                            height="150px"
+                          />
+                          <div className="card-body d-flex flex-column">
+                            <h5 className="card-title">
+                              <Link
+                                to={`/product/${product._id}`}
+                                style={{ maxBlockSize: "180px" }}
+                              >
+                                {product.name}
+                              </Link>
+                            </h5>
+                            <div className="ratings mt-auto">
+                              <div className="rating-outer">
+                                <div className="rating-inner"></div>
+                              </div>
+                              <span id="no_of_reviews" style={{ color: "red" }}>
+                                {product.stock != 0 ? (
+                                  <p> {product.stock} Procuts Left </p>
+                                ) : (
+                                  <p>Out of Stock </p>
+                                )}
+                              </span>
                             </div>
-                            <span id="no_of_reviews" style={{ color: "red" }}>
-                              {product.stock != 0 ? <p> {product.stock} Procuts Left </p> : <p>Out of Stock </p>}
-                            </span>
-                          </div>
-                          <p className="card-text" style={{ color: "blue" }}>{product.price}$</p>
-                          <div class="divIcons">
+                            <p className="card-text" style={{ color: "blue" }}>
+                              {product.price}$
+                            </p>
+                            <div class="divIcons">
+                              <Link
+                                to={`/product/${product._id}`}
+                                id="view_btn"
+                              >
+                                <InfoIcon style={{ fontSize: "35px" }} />
+                              </Link>
 
-                            <Link
-                              to={`/product/${product._id}`}
-                              id="view_btn"
-
-                            >
-                              <InfoIcon style={{ fontSize: "35px" }} />
-                            </Link>
-
-                            <Link
-                              to="/cart"
-                              id="cart_btn"
-
-                            >
-                              <ShoppingCartIcon style={{ color: "green", marginLeft: "50px", fontSize: "35px" }} />
-                            </Link>
+                              <Link to="/cart" id="cart_btn">
+                                <ShoppingCartIcon
+                                  style={{
+                                    color: "green",
+                                    marginLeft: "50px",
+                                    fontSize: "35px",
+                                  }}
+                                />
+                              </Link>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
               </div>
             </section>
           </div>
@@ -164,8 +190,7 @@ const Products = ({ match }) => {
             />
           </div>
         </>
-      )
-      }
+      )}
     </>
   );
 };
