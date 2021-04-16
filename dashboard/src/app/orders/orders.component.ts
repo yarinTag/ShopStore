@@ -31,7 +31,6 @@ export class OrdersComponent implements OnInit {
 
   onClick(order : Order){
     this.current.changeCurrentOrder(order);
-    console.log(order);
     
   }
   Ostatus:String

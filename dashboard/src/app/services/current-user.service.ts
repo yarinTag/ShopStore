@@ -6,13 +6,23 @@ import { User } from '../../../models/user';
   providedIn: 'root'
 })
 export class CurrentUserService {
+  static changeCurrentOrder(user: User) {
+    throw new Error('Method not implemented.');
+  }
 
   private source = new BehaviorSubject(null);
   currentUser = this.source.asObservable();
+  user:User
 
-  constructor() { }
+  constructor() {}
 
-  changeCurrentUser(User: User) {
-    this.source.next(User);
+  changeCurrentUser(user: User) {
+    this.source.next(user);
+    this.user=user
+  }
+
+  
+  getCurrentUser():User{
+    return this.user
   }
 }
