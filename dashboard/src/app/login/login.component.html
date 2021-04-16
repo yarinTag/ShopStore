@@ -1,16 +1,23 @@
-<!DOCTYPE html>
-<html>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<body>
 
-<div ng-app="">
-  <form>
-    First Name: <input type="text" ng-model="firstname">
-  </form>
-  <h1>You entered: {{firstname}}</h1>
-</div>
+<div class="container" style="max-width: 500px;">
+  <h3 class="mb-3 mt-5 text-center">Login</h3>
 
-<p>Change the name inside the input field, and you will see the name in the header changes accordingly.</p>
+  <div class="form-group">
+    <input type="text" [(ngModel)]="userObj.userEmail" class="form-control" placeholder="Email">
 
-</body>
-</html>
+  </div>
+  <div class="form-group">
+      <input type="password" [(ngModel)]="userObj.userPassword" class="form-control" placeholder="Password">
+    </div>
+    <div>
+      <div class="error">
+        {{errorMessage}}
+    </div>
+
+  <div style="text-align: center;" >
+    <button class="button"
+    style="vertical-align: middle"
+    type="button"
+    id="send"
+    style="cursor: pointer" (click)="signIn()">Enter</button>
+  </div>

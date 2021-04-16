@@ -13,7 +13,7 @@ const { isAuthenticated, authorizeRoles } = require("../utils/auth");
 router.post("/order/new", isAuthenticated, newOrder);
 router.get("/order/:id", isAuthenticated, getSingleOrder);
 router.get("/orders/me", isAuthenticated, myOrder);
-
+router.get("/orders",allOrders);
 //---------Admin Routs----------//
 router.get(
   "/admin/orders",
