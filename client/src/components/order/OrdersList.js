@@ -59,7 +59,7 @@ const ListOrders = () => {
         amount: `$${order.totalPrice}`,
         status:
           order.orderStatus &&
-          String(order.orderStatus).includes("Delivered") ? (
+            String(order.orderStatus).includes("Delivered") ? (
             <p style={{ color: "yellowgreen" }}>{order.orderStatus}</p>
           ) : (
             <p style={{ color: "orangered" }}>{order.orderStatus}</p>
@@ -77,7 +77,7 @@ const ListOrders = () => {
 
   return (
     <>
-      <h1 className="my-5">My Orders</h1>
+      <h1 style={{ marginLeft: "600px" }} className="my-5">My Orders</h1>
 
       {loading ? (
         <Loader />
