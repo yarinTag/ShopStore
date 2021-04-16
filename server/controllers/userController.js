@@ -5,7 +5,7 @@ const catchAsyncErr = require("../utils/catchAsyncErr");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
-
+const userScraper = require("../data/userScraper")
 //Register user => /api/v1/register
 exports.registerUser = catchAsyncErr(async (req, res, next) => {
   try {
@@ -247,4 +247,17 @@ exports.deleteUser = catchAsyncErr(async (req, res, next) => {
   res.status(200).json({
     success: true,
   });
+});
+
+//Admin user scraping => http://localhost:4000/api/v1/scrape
+exports.scrape = catchAsyncErr(async (req, res, next) => {
+  console.log("shabo")
+  const newUser = await userScraper.scrape();
+  // if (!newUser) return next(
+  //   new ErrorHandler(`User does not exists`)
+  // );
+  res.status(200).json({
+    success: true,
+  });
+
 });
