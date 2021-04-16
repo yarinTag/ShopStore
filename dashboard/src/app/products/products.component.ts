@@ -34,28 +34,25 @@ onClickEdit(product: Product):void{
 
 onDeleteClick(product: Product):void{
   const url = `${this.ProductDelete}/${product._id}`
-  console.log(url);
   
   this.http.delete(url).subscribe(data => {
-      console.log(data);
     })
     }
 
 
 ngOnInit(): void {
+
   this.http.get(this.ProductsUrl)
   .subscribe(Response => {
-
-    if(Response){  
-      hideloader();
-    }
+    console.log(Response[2]);
+    
     this.li=Response.products;
       
     this.products=this.li
+    console.log(this.products);
+
     this.sharedService.sendClickEvent(this.products)
   });
-  function hideloader(){
-    document.getElementById('loading')}
 
  }
 

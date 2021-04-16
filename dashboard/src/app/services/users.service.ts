@@ -20,18 +20,18 @@ export class UsersService {
     return this.http.get<User[]>(this.UsersUrl);
   }
 
-  addUser(id: number): Observable<User> {
-    return this.http.post<User>(this.UsersUrl, { _id: id });
+  addUser(firstName: String): Observable<User> {
+    return this.http.post<User>(this.UsersUrl, { _firstName: firstName });
   }
 
-  getUser(id: number): Observable<User> {
-    const url = `${this.UsersUrl}/${id}`;
+  getUser(firstName: String): Observable<User> {
+    const url = `${this.UsersUrl}/${firstName}`;
     return this.http.get<User>(url);
   }
 
   updateUser(User: User): Observable<User> {
-    const url = `${this.UsersUrl}/${User._id}`;
-    return this.http.patch<User>(url, { title: User._id });
+    const url = `${this.UsersUrl}/${User.firstName}`;
+    return this.http.patch<User>(url, { title: User.firstName });
   }
 
   deleteUser(id: number): Observable<User> {
