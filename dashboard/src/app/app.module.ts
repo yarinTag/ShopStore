@@ -21,6 +21,7 @@ import { ScatterComponent } from './statistic/scatter/scatter.component';
 import { StatisticsComponent } from './statistic/statistics/statistics.component'
 import { StatisticsModule } from './statistic/statistics/statistics.module';
 import { ProductEditModule } from './products/product-edit.module';
+import { OrderEditModule } from './orders/order-edit.module';
 
 
 const routes: Routes = [
@@ -51,6 +52,8 @@ const routes: Routes = [
     OrdersModule,
     StatisticsModule,
     ProductEditModule,
+    OrderEditModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

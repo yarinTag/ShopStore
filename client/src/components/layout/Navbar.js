@@ -60,7 +60,7 @@ const Navbar = () => {
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="http://localhost:4200/users">
                 Edit Users
               </a>
               <a class="dropdown-item" href="http://localhost:4200/products">
@@ -69,7 +69,7 @@ const Navbar = () => {
               <a class="dropdown-item" href="http://localhost:4200/orders">
                 Edit Orders
               </a>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="http://localhost:4200/statistics">
                 Statistics
               </a>
             </div>
