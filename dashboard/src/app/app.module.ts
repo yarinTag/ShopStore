@@ -20,6 +20,7 @@ import { PieComponent } from './statistic/pie/pie.component';
 import { ScatterComponent } from './statistic/scatter/scatter.component';
 import { StatisticsComponent } from './statistic/statistics/statistics.component'
 import { StatisticsModule } from './statistic/statistics/statistics.module';
+import { ProductEditModule } from './products/product-edit.module';
 
 
 const routes: Routes = [
@@ -48,7 +49,8 @@ const routes: Routes = [
     BrowserAnimationsModule,
     ProductsModule,
     OrdersModule,
-    StatisticsModule
+    StatisticsModule,
+    ProductEditModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
