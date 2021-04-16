@@ -23,4 +23,5 @@ router.get('/products', getProducts);
 router.put('/product/edit/:id',updateProduct);
 router.delete('/product/delete/:id',deleteProduct);
 
+
 module.exports = router;

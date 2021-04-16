@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart, removeItemFromCart } from "../../actions/cartActions";
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const Cart = ({ history }) => {
   const dispatch = useDispatch();
@@ -61,14 +61,19 @@ const Cart = ({ history }) => {
                         />
                       </div>
 
-                      <div className="col-5 col-lg-3" style={{ marginTop: "50px" }}>
+                      <div
+                        className="col-5 col-lg-3"
+                        style={{ marginTop: "50px" }}
+                      >
                         <Link to={`/products/${item.product}`}>
                           {item.name}
                         </Link>
                       </div>
 
-                      <div className="col-4 col-lg-2 mt-4 mt-lg-0" >
-                        <p id="card_item_price" style={{ marginTop: "50px" }}>{item.price}$ </p>
+                      <div className="col-4 col-lg-2 mt-4 mt-lg-0">
+                        <p id="card_item_price" style={{ marginTop: "50px" }}>
+                          {item.price}${" "}
+                        </p>
                       </div>
 
                       <div className="col-4 col-lg-3 mt-4 mt-lg-0">
@@ -104,9 +109,14 @@ const Cart = ({ history }) => {
                         </div>
                       </div>
 
-                      <div >
+                      <div>
                         <DeleteIcon
-                          id="delete_cart_item" style={{ color: "red", fontSize: "30px", marginTop: "40px" }}
+                          id="delete_cart_item"
+                          style={{
+                            color: "red",
+                            fontSize: "30px",
+                            marginTop: "40px",
+                          }}
                           onClick={() => removeCartItemHandler(item.product)}
                         />
                       </div>

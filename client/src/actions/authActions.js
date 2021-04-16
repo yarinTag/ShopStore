@@ -36,6 +36,7 @@ export const login = (email, password) => async (dispatch) => {
       { email, password },
       config
     );
+    localStorage.setItem("token", data.token);
 
     dispatch({
       type: LOGIN_SUCCESS,
@@ -44,10 +45,39 @@ export const login = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,
-      payload: error.response.data.message
+      payload: error.response.data.message,
     });
   }
 };
+
+// export const login = (email, password) => async (dispatch) => {
+//   try {
+//     dispatch({ type: LOGIN_REQ });
+
+//     const config = {
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     };
+
+//     const result = await axios
+//       .post("/api/v1/login", { email, password }, config)
+//       .then((res) => {
+//         if (res.data.token) localStorage.setItem("token", res.data.token);
+//         const token = localStorage.getItem("token");
+//       });
+//     console.log(result.data.user);
+//     dispatch({
+//       type: LOGIN_SUCCESS,
+//       payload: result.data.user,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: LOGIN_FAIL,
+//       // payload: error.response.data.message,
+//     });
+//   }
+// };
 
 //Register
 export const register = (userData) => async (dispatch) => {
@@ -96,7 +126,7 @@ export const loadUser = () => async (dispatch) => {
 // Logout user
 export const logOut = () => async (dispatch) => {
   try {
-    await axios.get("/api/v1/logout");
+    await axios.get("/api/v1/logout").then(localStorage.removeItem("token"));
 
     dispatch({
       type: LOGOUT_SUCCESS,
