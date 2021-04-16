@@ -17,8 +17,9 @@
         <td>{{ product.stock }}</td>
         <td>{{ product.category }}</td>
         <td>{{ product.createdAt }}</td>
-        <td class="edit" (click)="onClickEdit(product)" style="color: blue;" [routerLink]="'/product-edit'">Edit</td>
-        <td class="delete" (click)="onDeleteClick(product)" style="color: blue;">Delete</td>
+
+        <td class="edit" (click)="onClickEdit(product)" style="color: blue;" [routerLink]="'/product-edit'">edit</td>
+        <td class="delete" (click)="onDeleteClick(product)" style="color: blue;" [routerLink]="'/products'">delete</td>
     </tr>
     </tbody>
 </table>  
