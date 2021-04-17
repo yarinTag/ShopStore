@@ -17,6 +17,10 @@ export class OrdersComponent implements OnInit {
   li:any;
   orders=[];
   status: string;
+  Ostatus:String
+  searchValue :string
+
+  
   constructor(private http : HttpClient, private current:CurrentOrderService ){}
   ngOnInit(): void {
         
@@ -33,7 +37,7 @@ export class OrdersComponent implements OnInit {
     this.current.changeCurrentOrder(order);
     
   }
-  Ostatus:String
+
 
   onClickEdit(order: Order):void{
     this.current.changeCurrentOrder(order);
