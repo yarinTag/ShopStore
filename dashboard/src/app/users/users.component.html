@@ -1,7 +1,14 @@
 <h1 style="margin-left: 350px;">Users List</h1>
 
-Search <input type="text" ng-model="search" 
-placeholder="Enter some text to search" />
+<div class="form-group row">
+  <div class="form-group row">
+    <label for="search" class="col-sm-2 col-form-label" style="text-align: right;" >Search</label>
+    <div class="col-sm-9" style="padding-left: 70px;">
+      <input type="text" [(ngModel)]="searchValue" (input)="searchValue=$event.target.value" class="form-control" id="search" />
+    </div>
+</div>
+</div>
+
 
 <table class="table" id='tab'>
   <thead>
@@ -16,7 +23,7 @@ placeholder="Enter some text to search" />
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users | filter : search">
+    <tr *ngFor="let user of users | Usersearchfilter: searchValue">
       <td>{{ user.firstName}}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.role }}</td>
