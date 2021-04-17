@@ -11,7 +11,6 @@ import { local } from 'd3-selection';
 })
 export class DashboardComponent {
 
-  url = environment.AddUsersUrl;
   constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit() {

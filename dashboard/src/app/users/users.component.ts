@@ -18,6 +18,7 @@ export class UsersComponent {
 
   UserUrl= environment.UserUrl;
   url=environment.EditUserUrl
+  userRole:String
 
   users = [];  
   li:any;
@@ -34,10 +35,9 @@ export class UsersComponent {
       this.users=this.li.users
     });  
 
+    }
+
   }
-
-    userRole:String
-
     onClickEdit(user: User):void{
       this.current.changeCurrentUser(user);
       if(this.userRole!==user.role){
@@ -68,5 +68,5 @@ export class UsersComponent {
   handlePanel(action: string) {
     this.load();
   }
-
+    
 }

@@ -39,7 +39,6 @@ export class OrdersComponent implements OnInit {
 
 
   }
-  Ostatus: String
 
 
   onClickEdit(order: Order): void {
