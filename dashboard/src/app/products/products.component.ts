@@ -19,46 +19,48 @@ import { CurrentProductService } from '../services/current-product.service';
 
 @Injectable()
 export class ProductsComponent {
-  products : Product[] = [];  
+  products: Product[] = [];
 
-  ProductsUrl= environment.ProductUrl;
-  ProductDelete= environment.ProductDelete;
-  li:any;
-  lis=[];
+  ProductsUrl = environment.ProductUrl;
+  ProductDelete = environment.ProductDelete;
+  li: any;
+  lis = [];
   status: string;
-  constructor(private http : HttpClient,
-     private productService:ProductService ,
-     private sharedService:SharedService,
-     private current:CurrentProductService){
+  constructor(private http: HttpClient,
+    private productService: ProductService,
+    private sharedService: SharedService,
+    private current: CurrentProductService) {
 
-}
-
-
-onClickEdit(product: Product):void{
-  this.current.changeCurrentProduct(product);
-}
-
-onDeleteClick(product: Product):void{
-  const url = `${environment.ProductDeleteUrl}/${product._id}`
-  this.http.delete(url).subscribe(() => this.status = 'Delete successful');
-  window.location.reload();
-}
+  }
 
 
-ngOnInit(): void {
+  onClickEdit(product: Product): void {
+    this.current.changeCurrentProduct(product);
+  }
 
-  this.http.get(this.ProductsUrl)
-  .subscribe(Response => {    
-    this.li=Response;
-    this.products=this.li.products
-    this.sharedService.sendClickEvent(this.products)
-  });
+  onDeleteClick(product: Product): void {
+    const url = `${environment.ProductDeleteUrl}/${product._id}`
+    this.http.delete(url).subscribe(() => this.status = 'Delete successful');
+    window.location.reload();
+  }
 
 
- }
- load():void{
+  ngOnInit(): void {
+    // this.http.get(`${this.AdminUrl}/?token=${token}`).subscribe(Response => { this.li = Response })
+    let token = localStorage.getItem("token")
+    if (token && localStorage.getItem("token") != "undefined" || "") {
+      this.http.get(this.ProductsUrl)
+        .subscribe(Response => {
+          this.li = Response;
+          this.products = this.li.products
+          this.sharedService.sendClickEvent(this.products)
+        });
+    }
+
+  }
+  load(): void {
     this.ngOnInit()
-}
+  }
 
 }
 

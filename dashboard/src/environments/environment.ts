@@ -5,14 +5,15 @@
 export const environment = {
   production: false,
   UserUrl: 'http://localhost:4000/api/v1/admin/allusers',
-  ProductUrl:"http://localhost:4000/api/v1/products",
-  ProductDelete:"http://localhost:4000/api/v1/admin/product",
-  AddUsersUrl:"",
-  OrderUrl:"http://localhost:4000/api/v1/orders",
-  EditProductUrl:"http://localhost:4000/api/v1/product/edit",
-  ProductDeleteUrl:'http://localhost:4000/api/v1/product/delete',
-  OrderDeleteUrl:"http://localhost:4000/api/v1/order/delete/",
-  EditOrderUrl:"http://localhost:4000/api/v1/order/edit/",
+  ProductUrl: "http://localhost:4000/api/v1/products",
+  ProductDelete: "http://localhost:4000/api/v1/admin/product",
+  AddUsersUrl: "",
+  OrderUrl: "http://localhost:4000/api/v1/orders",
+  EditProductUrl: "http://localhost:4000/api/v1/product/edit",
+  ProductDeleteUrl: 'http://localhost:4000/api/v1/product/delete',
+  OrderDeleteUrl: "http://localhost:4000/api/v1/order/delete/",
+  EditOrderUrl: "http://localhost:4000/api/v1/order/edit/",
+  AdminIsAuthenticated: "http://localhost:4000/api/v1/admin/users",
 
 };
 

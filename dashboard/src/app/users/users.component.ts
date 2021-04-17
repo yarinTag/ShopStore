@@ -5,6 +5,7 @@ import { CurrentUserService } from '../services/current-user.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -14,34 +15,40 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class UsersComponent {
- 
-  UserUrl= environment.UserUrl;
 
-  users = [];  
-  li:any;
+  UserUrl = environment.UserUrl;
+  //route : any
+  users = [];
+  li: any;
 
-  constructor(private usersService : UsersService, 
-              private currentUserService: CurrentUserService,private http : HttpClient){}
+  constructor(private usersService: UsersService, private route: ActivatedRoute,
+    private currentUserService: CurrentUserService, private http: HttpClient) { }
 
   ngOnInit() {
-    
-    this.http.get(this.UserUrl)
-    .subscribe(Response => {
-      this.li= Response;  
-      this.users=this.li.users
-    });  }
+    // let token = this.route.snapshot.queryParams["token"]
+    // //  console.log(param1)
+    // console.log(token)
+    let token = localStorage.getItem("token")
+    if (token && localStorage.getItem("token") != "undefined" || "") {
+      this.http.get(this.UserUrl)
+        .subscribe(Response => {
+          this.li = Response;
+          this.users = this.li.users
+        });
+    }
+  }
 
-  load(){
+  load() {
     this.usersService.getUsers().subscribe(data => {
       this.users = data;
     });
   }
-  
-  onClick(user : User){
+
+  onClick(user: User) {
     this.currentUserService.changeCurrentUser(user);
   }
 
-  handlePanel(action : string){
+  handlePanel(action: string) {
     this.load();
   }
 }

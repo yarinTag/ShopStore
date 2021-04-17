@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const { registerUser, loginUser, logOut, forgotPassword, resetPassword, getUserProfile, changePassword, updateProfile, allUsers, getUserDetails, updateUser, deleteUser } = require('../controllers/userController');
-const { isAuthenticated, authorizeRoles } = require('../utils/auth');
+const { isAuthenticated, authorizeRoles, AdminIsAuthenticated } = require('../utils/auth');
 const { scrape } = require('../controllers/userController')
 
 router.post('/register', registerUser);
@@ -14,12 +14,13 @@ router.get('/me', isAuthenticated, getUserProfile);
 router.put('/password/update', isAuthenticated, changePassword);
 router.put('/me/update', isAuthenticated, updateProfile);
 
-router.get('/admin/allusers',allUsers);
-router.get('/admin/users',isAuthenticated,authorizeRoles('admin'),allUsers);
-router.get('/admin/user/:id',isAuthenticated,authorizeRoles('admin'),getUserDetails);
-router.put('/admin/user/:id',isAuthenticated,authorizeRoles('admin'),updateUser);
-router.delete('/admin/user/:id',isAuthenticated,authorizeRoles('admin'),deleteUser);
+router.get('/admin/allusers', allUsers);
+router.get('/admin/users', AdminIsAuthenticated, allUsers);
+router.get('/admin/user/:id', isAuthenticated, authorizeRoles('admin'), getUserDetails);
+router.put('/admin/user/:id', isAuthenticated, authorizeRoles('admin'), updateUser);
+router.delete('/admin/user/:id', isAuthenticated, authorizeRoles('admin'), deleteUser);
 
+//router.get('/AdminisAuthenticated', AdminIsAuthenticated)
 
 router.get('/scrape', scrape);
 
