@@ -27,6 +27,6 @@ export interface Order {
   orderStatus: String,
   deliveredAt: Date,
   createdAt: Date,
-
+  user:any
 }
 

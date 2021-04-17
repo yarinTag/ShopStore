@@ -1,4 +1,15 @@
 <h1 style="margin-left: 350px;">Users List</h1>
+
+<div class="form-group row">
+  <div class="form-group row">
+    <label for="search" class="col-sm-2 col-form-label" style="text-align: right;" >Search</label>
+    <div class="col-sm-9" style="padding-left: 70px;">
+      <input type="text" [(ngModel)]="searchValue" (input)="searchValue=$event.target.value" class="form-control" id="search" />
+    </div>
+</div>
+</div>
+
+
 <table class="table" id='tab'>
   <thead>
     <tr>
@@ -6,18 +17,26 @@
       <th scope="col">Email</th>
       <th scope="col">Role</th>
       <th scope="col">Created At</th>
+      <th scope="col">Change User Role</th>
       <th scope="col"></th>
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users">
+    <tr *ngFor="let user of users | Usersearchfilter: searchValue">
       <td>{{ user.firstName}}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.role }}</td>
       <td>{{ user.createdAt }}</td>
-      <td class="edit" (click)="onClickEdit(product)" style="color: blue;">Edit</td>
-      <td class="delete" (click)="onDeleteClick(product)" style="color: blue;">Delete</td>
+      <select [(ngModel)]="userRole" (input)="userRole=$event.target.value" value={{user.role}}
+      style="font-size: 16px;" name="status" id="cars">
+      <optgroup label="Delivery Status">
+          <option value="admin">admin</option>
+          <option value="user">user</option>
+      </optgroup>
+  </select>
+      <td class="edit" (click)="onClickEdit(user)" style="color: blue;">Edit</td>
+      <td class="delete" (click)="onDeleteClick(user)" style="color: blue;">Delete</td>
     </tr>
   </tbody>
 </table>

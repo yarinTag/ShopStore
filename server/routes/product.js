@@ -8,7 +8,7 @@ const { isAuthenticated, authorizeRoles } = require('../utils/auth');
 
 router.get('/product/:id', getSingleProduct);
 
-router.post('/admin/product/new', isAuthenticated, authorizeRoles('admin'), newProduct);
+router.post('/admin/product/new', newProduct);
 
 // router.put('/admin/product/:id', isAuthenticated, authorizeRoles('admin'), updateProduct);
 

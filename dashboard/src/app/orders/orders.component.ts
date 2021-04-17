@@ -18,6 +18,10 @@ export class OrdersComponent implements OnInit {
   orders = [];
   status: string;
   constructor(private http: HttpClient, private current: CurrentOrderService) { }
+
+  Ostatus:String
+  searchValue :string
+
   ngOnInit(): void {
     let token = localStorage.getItem("token")
     if (token && localStorage.getItem("token") != "undefined" || "") {
@@ -32,10 +36,11 @@ export class OrdersComponent implements OnInit {
 
   onClick(order: Order) {
     this.current.changeCurrentOrder(order);
-    console.log(order);
+
 
   }
   Ostatus: String
+
 
   onClickEdit(order: Order): void {
     this.current.changeCurrentOrder(order);

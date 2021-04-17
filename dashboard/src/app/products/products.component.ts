@@ -26,23 +26,6 @@ export class ProductsComponent {
   li: any;
   lis = [];
   status: string;
-  constructor(private http: HttpClient,
-    private productService: ProductService,
-    private sharedService: SharedService,
-    private current: CurrentProductService) {
-
-  }
-
-
-  onClickEdit(product: Product): void {
-    this.current.changeCurrentProduct(product);
-  }
-
-  onDeleteClick(product: Product): void {
-    const url = `${environment.ProductDeleteUrl}/${product._id}`
-    this.http.delete(url).subscribe(() => this.status = 'Delete successful');
-    window.location.reload();
-  }
 
 
   ngOnInit(): void {
@@ -57,8 +40,29 @@ export class ProductsComponent {
         });
     }
 
-  }
-  load(): void {
+  
+  searchValue :string
+
+  constructor(private http : HttpClient,
+     private productService:ProductService ,
+     private sharedService:SharedService,
+     private current:CurrentProductService){
+
+}
+
+
+onClickEdit(product: Product):void{
+  this.current.changeCurrentProduct(product);
+}
+
+onDeleteClick(product: Product):void{
+  const url = `${environment.ProductDeleteUrl}/${product._id}`
+  this.http.delete(url).subscribe(() => this.status = 'Delete successful');
+  window.location.reload();
+}
+
+
+ load():void{
     this.ngOnInit()
   }
 

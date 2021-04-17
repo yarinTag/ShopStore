@@ -1,0 +1,10 @@
+<p>Edit User</p>
+
+<label for="UserName">User Name: {{user.firstName}}</label>
+<h1> </h1>
+
+<input [(ngModel)]="name" id="UserName" [value]="name" (input)="name=$event.target.value">
+<h1></h1>
+
+
+<button (click)="onClick()" [routerLink]="'/users'" >Submit</button>

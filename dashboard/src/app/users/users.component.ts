@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { User } from 'models/user';
 import { UsersService } from '../services/users2.service';
 import { CurrentUserService } from '../services/current-user.service';
@@ -16,29 +16,46 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 @Injectable()
 export class UsersComponent {
 
-  UserUrl = environment.UserUrl;
-  //route : any
-  users = [];
-  li: any;
+  UserUrl= environment.UserUrl;
+  url=environment.EditUserUrl
 
-  constructor(private usersService: UsersService, private route: ActivatedRoute,
-    private currentUserService: CurrentUserService, private http: HttpClient) { }
+  users = [];  
+  li:any;
+  searchValue :string
+  constructor(private usersService : UsersService, private current:CurrentUserService,
+              private currentUserService: CurrentUserService,private http : HttpClient){}
 
   ngOnInit() {
-    // let token = this.route.snapshot.queryParams["token"]
-    // //  console.log(param1)
-    // console.log(token)
-    let token = localStorage.getItem("token")
+      let token = localStorage.getItem("token")
     if (token && localStorage.getItem("token") != "undefined" || "") {
-      this.http.get(this.UserUrl)
-        .subscribe(Response => {
-          this.li = Response;
-          this.users = this.li.users
-        });
-    }
+    this.http.get(this.UserUrl)
+    .subscribe(Response => {
+      this.li= Response;  
+      this.users=this.li.users
+    });  
+
   }
 
-  load() {
+    userRole:String
+
+    onClickEdit(user: User):void{
+      this.current.changeCurrentUser(user);
+      if(this.userRole!==user.role){
+        user.role=this.userRole
+      } 
+      this.http.put(this.url+user._id,user).subscribe(() => status = 'Edit successful');
+    }
+    
+    onDeleteClick(user: User):void{
+      const url = `${environment.DeleteUserUrl}${user._id}`
+      console.log(url);
+      
+      this.http.delete(url).subscribe(() => status = 'Delete successful');
+      window.location.reload();
+    }
+  
+
+  load(){
     this.usersService.getUsers().subscribe(data => {
       this.users = data;
     });
@@ -51,4 +68,5 @@ export class UsersComponent {
   handlePanel(action: string) {
     this.load();
   }
+
 }

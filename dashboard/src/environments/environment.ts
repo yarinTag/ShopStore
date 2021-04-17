@@ -14,6 +14,9 @@ export const environment = {
   OrderDeleteUrl: "http://localhost:4000/api/v1/order/delete/",
   EditOrderUrl: "http://localhost:4000/api/v1/order/edit/",
   AdminIsAuthenticated: "http://localhost:4000/api/v1/admin/users",
+    DeleteUserUrl:"http://localhost:4000/api/v1/user/delete/",
+  AddNewProduct:"http://localhost:4000/api/v1/admin/product/new",
+  GetSingleProduct:"http://localhost:4000/api/v1/product/605f56fc4dfa02270c70dfa0",
 
 };
 
