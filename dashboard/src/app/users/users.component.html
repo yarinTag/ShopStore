@@ -1,4 +1,8 @@
 <h1 style="margin-left: 350px;">Users List</h1>
+
+Search <input type="text" ng-model="search" 
+placeholder="Enter some text to search" />
+
 <table class="table" id='tab'>
   <thead>
     <tr>
@@ -12,12 +16,18 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users">
+    <tr *ngFor="let user of users | filter : search">
       <td>{{ user.firstName}}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.role }}</td>
       <td>{{ user.createdAt }}</td>
-      <input [(ngModel)]="userRole" id="UserRole" value={{user.role}} (input)="userRole=$event.target.value" >
+      <select [(ngModel)]="userRole" (input)="userRole=$event.target.value" value={{user.role}}
+      style="font-size: 16px;" name="status" id="cars">
+      <optgroup label="Delivery Status">
+          <option value="admin">admin</option>
+          <option value="user">user</option>
+      </optgroup>
+  </select>
       <td class="edit" (click)="onClickEdit(user)" style="color: blue;">Edit</td>
       <td class="delete" (click)="onDeleteClick(user)" style="color: blue;">Delete</td>
     </tr>

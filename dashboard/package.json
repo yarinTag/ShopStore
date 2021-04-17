@@ -19,6 +19,7 @@
     "@types/jasmine": "2.8.9",
     "@types/jasminewd2": "2.0.5",
     "@types/node": "8.9.5",
+    "angular-bootstrap-md": "^11.0.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "core-js": "2.5.7",

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { User } from 'models/user';
 import { UsersService } from '../services/users2.service';
 import { CurrentUserService } from '../services/current-user.service';
@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class UsersComponent {
- 
+
   UserUrl= environment.UserUrl;
   url=environment.EditUserUrl
 
@@ -30,7 +30,9 @@ export class UsersComponent {
     .subscribe(Response => {
       this.li= Response;  
       this.users=this.li.users
-    });  }
+    });  
+
+  }
 
     userRole:String
 
@@ -39,7 +41,7 @@ export class UsersComponent {
       if(this.userRole!==user.role){
         user.role=this.userRole
       } 
-      this.http.put(this.url+'/'+user._id,user).subscribe(() => status = 'Edit successful');
+      this.http.put(this.url+user._id,user).subscribe(() => status = 'Edit successful');
     }
     
     onDeleteClick(user: User):void{
@@ -64,4 +66,5 @@ export class UsersComponent {
   handlePanel(action : string){
     this.load();
   }
+
 }
