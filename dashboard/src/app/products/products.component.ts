@@ -20,12 +20,17 @@ import { CurrentProductService } from '../services/current-product.service';
 @Injectable()
 export class ProductsComponent {
   products: Product[] = [];
-
+  searchValue :string
   ProductsUrl = environment.ProductUrl;
   ProductDelete = environment.ProductDelete;
   li: any;
   lis = [];
   status: string;
+
+  constructor(private http : HttpClient,
+    private productService:ProductService ,
+    private sharedService:SharedService,
+    private current:CurrentProductService){}
 
 
   ngOnInit(): void {
@@ -41,14 +46,8 @@ export class ProductsComponent {
     }
 
   
-  searchValue :string
 
-  constructor(private http : HttpClient,
-     private productService:ProductService ,
-     private sharedService:SharedService,
-     private current:CurrentProductService){
-
-}
+  }
 
 
 onClickEdit(product: Product):void{
@@ -66,6 +65,6 @@ onDeleteClick(product: Product):void{
     this.ngOnInit()
   }
 
-}
 
+}
 
