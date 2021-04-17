@@ -1,4 +1,14 @@
 <h1 style="margin-left: 350px;">Orders List</h1>
+
+<div class="form-group row">
+    <div class="form-group row">
+      <label for="search" class="col-sm-2 col-form-label" style="text-align: right;" >Search</label>
+      <div class="col-sm-9" style="padding-left: 70px;">
+        <input type="text" [(ngModel)]="searchValue" (input)="searchValue=$event.target.value" class="form-control" id="search" />
+      </div>
+  </div>
+  </div>
+
 <table class="table" id='tab'>
     <thead>
         <tr>
@@ -13,7 +23,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let order of orders">
+        <tr *ngFor="let order of orders | orderssearchfilter: searchValue">
             <td>{{ order.user }}</td>
             <td>{{ order._id }}</td>
             <td>{{ order.totalPrice }}$</td>
@@ -27,8 +37,6 @@
                     <option value="Cancelled">Cancelled</option>
                 </optgroup>
             </select>
-            <!-- <input [(ngModel)]="Ostatus" id="OrderName" value={{order.orderStatus}}
-                (input)="Ostatus=$event.target.value"> -->
             <td class="edit" (click)="onClickEdit(order)" style="color: blue;">Edit</td>
             <td class="delete" (click)="onDeleteClick(order)" style="color: blue;">Delete</td>
 
