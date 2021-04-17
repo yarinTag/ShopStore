@@ -7,6 +7,9 @@ import {
   MY_ORDER_REQ,
   MY_ORDER_SUCCESS,
   MY_ORDER_FAIL,
+  ORDER_DETAILS_REQ,
+  ORDER_DETAILS_SUCCESS,
+  ORDER_DETAILS_FAIL,
 } from "../constants/orderConstants";
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -47,6 +50,25 @@ export const myOrders = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: MY_ORDER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Get order details
+export const getOrderDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: ORDER_DETAILS_REQ });
+
+    const { data } = await axios.get(`/api/v1/order/${id}`);
+
+    dispatch({
+      type: ORDER_DETAILS_SUCCESS,
+      payload: data.order,
+    });
+  } catch (error) {
+    dispatch({
+      type: ORDER_DETAILS_FAIL,
       payload: error.response.data.message,
     });
   }

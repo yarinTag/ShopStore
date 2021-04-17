@@ -14,9 +14,9 @@ router.post("/order/new", isAuthenticated, newOrder);
 router.get("/order/:id", isAuthenticated, getSingleOrder);
 router.get("/orders/me", isAuthenticated, myOrder);
 //--------angular------//
-router.get("/orders",allOrders);
-router.delete("/order/delete/:id",deleteOrder);
-router.put("/order/edit/:id",updateOrder);
+router.get("/orders", allOrders);
+router.delete("/order/delete/:id", deleteOrder);
+router.put("/order/edit/:id", updateOrder);
 //---------Admin Routs----------//
 router.get(
   "/admin/orders",

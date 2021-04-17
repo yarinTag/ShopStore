@@ -21,9 +21,9 @@ import NewPassword from "./components/auth/NewPassword";
 import { useSelector } from "react-redux";
 import Payment from "./components/cart/Payment";
 import ProductDetails from "./components/layout/ProductDetails";
-import About from "./components/layout/About"
+import About from "./components/layout/About";
 import "./App.css";
-
+import OrderDetails from "./components/order/OrderDetails";
 
 function App() {
   useEffect(() => {
@@ -53,9 +53,10 @@ function App() {
         <Route exact path="/product/:id" component={ProductDetails} />
         <ProtectedRoute exact path="/cart" component={Cart} />
         <ProtectedRoute exact path="/orders/me" component={OrdersList} />
+        <ProtectedRoute exact path="/order/:id" component={OrderDetails} />
 
         <Route exact path="/" component={About} />
-        <Route exact path="/about" component={About}/>
+        <Route exact path="/about" component={About} />
         <Footer />
       </div>
     </Router>

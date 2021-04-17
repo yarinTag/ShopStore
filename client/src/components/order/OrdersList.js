@@ -6,9 +6,12 @@ import Loader from "../layout/Loader";
 
 import { useDispatch, useSelector } from "react-redux";
 import { myOrders, clearErrors } from "../../actions/orderActions";
+import { useAlert } from "react-alert";
+import InfoIcon from "@material-ui/icons/Info";
 
 const ListOrders = () => {
   const dispatch = useDispatch();
+  const alert = useAlert();
 
   const { loading, error, orders } = useSelector((state) => state.myOrders);
 
@@ -16,6 +19,7 @@ const ListOrders = () => {
     dispatch(myOrders());
 
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
   }, [dispatch, alert, error]);
@@ -59,14 +63,14 @@ const ListOrders = () => {
         amount: `$${order.totalPrice}`,
         status:
           order.orderStatus &&
-            String(order.orderStatus).includes("Delivered") ? (
+          String(order.orderStatus).includes("Delivered") ? (
             <p style={{ color: "yellowgreen" }}>{order.orderStatus}</p>
           ) : (
             <p style={{ color: "orangered" }}>{order.orderStatus}</p>
           ),
         actions: (
           <Link to={`/order/${order._id}`} className="btn btn-primary">
-            <i className="fa fa-eye"></i>
+            <InfoIcon />
           </Link>
         ),
       });
@@ -77,7 +81,9 @@ const ListOrders = () => {
 
   return (
     <>
-      <h1 style={{ marginLeft: "600px" }} className="my-5">My Orders</h1>
+      <h1 style={{ marginLeft: "600px" }} className="my-5">
+        My Orders
+      </h1>
 
       {loading ? (
         <Loader />
