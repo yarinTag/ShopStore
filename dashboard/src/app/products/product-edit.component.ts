@@ -39,6 +39,7 @@ onClick():void{
   if(this.category!==this.product.category){
     this.product.category=this.category
   }
+  
   this.http.put(this.url+'/'+this.product._id,this.product).subscribe(() => this.status = 'Edit successful');
 }
 

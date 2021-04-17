@@ -19,21 +19,35 @@ import { CurrentProductService } from '../services/current-product.service';
 
 @Injectable()
 export class ProductsComponent {
-  products : Product[] = [];  
-
-  ProductsUrl= environment.ProductUrl;
-  ProductDelete= environment.ProductDelete;
-  li:any;
-  lis=[];
-  status: string;
+  products: Product[] = [];
   searchValue :string
+  ProductsUrl = environment.ProductUrl;
+  ProductDelete = environment.ProductDelete;
+  li: any;
+  lis = [];
+  status: string;
 
   constructor(private http : HttpClient,
-     private productService:ProductService ,
-     private sharedService:SharedService,
-     private current:CurrentProductService){
+    private productService:ProductService ,
+    private sharedService:SharedService,
+    private current:CurrentProductService){}
 
-}
+
+  ngOnInit(): void {
+    // this.http.get(`${this.AdminUrl}/?token=${token}`).subscribe(Response => { this.li = Response })
+    let token = localStorage.getItem("token")
+    if (token && localStorage.getItem("token") != "undefined" || "") {
+      this.http.get(this.ProductsUrl)
+        .subscribe(Response => {
+          this.li = Response;
+          this.products = this.li.products
+          this.sharedService.sendClickEvent(this.products)
+        });
+    }
+
+  
+
+  }
 
 
 onClickEdit(product: Product):void{
@@ -47,21 +61,10 @@ onDeleteClick(product: Product):void{
 }
 
 
-ngOnInit(): void {
-
-  this.http.get(this.ProductsUrl)
-  .subscribe(Response => {    
-    this.li=Response;
-    this.products=this.li.products
-    this.sharedService.sendClickEvent(this.products)
-  });
-
-
- }
  load():void{
     this.ngOnInit()
-}
+  }
+
 
 }
-
 

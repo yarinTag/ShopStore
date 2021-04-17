@@ -5,17 +5,18 @@
 export const environment = {
   production: false,
   UserUrl: 'http://localhost:4000/api/v1/admin/allusers',
-  ProductUrl:"http://localhost:4000/api/v1/products",
-  ProductDelete:"http://localhost:4000/api/v1/admin/product",
-  AddUsersUrl:"",
-  OrderUrl:"http://localhost:4000/api/v1/orders",
-  EditProductUrl:"http://localhost:4000/api/v1/product/edit",
-  ProductDeleteUrl:'http://localhost:4000/api/v1/product/delete',
-  OrderDeleteUrl:"http://localhost:4000/api/v1/order/delete/",
-  EditOrderUrl:"http://localhost:4000/api/v1/order/edit/",
-  EditUserUrl:"http://localhost:4000/api/v1/user/edit/",
+  ProductUrl: "http://localhost:4000/api/v1/products",
+  ProductDelete: "http://localhost:4000/api/v1/admin/product",
+  OrderUrl: "http://localhost:4000/api/v1/orders",
+  EditProductUrl: "http://localhost:4000/api/v1/product/edit",
+  ProductDeleteUrl: 'http://localhost:4000/api/v1/product/delete',
+  OrderDeleteUrl: "http://localhost:4000/api/v1/order/delete/",
+  EditOrderUrl: "http://localhost:4000/api/v1/order/edit/",
+  AdminIsAuthenticated: "http://localhost:4000/api/v1/admin/users",
   DeleteUserUrl:"http://localhost:4000/api/v1/user/delete/",
-
+  AddNewProduct:"http://localhost:4000/api/v1/admin/product/new",
+  GetSingleProduct:"http://localhost:4000/api/v1/product/605f56fc4dfa02270c70dfa0",
+  EditUserUrl:"http://localhost:4000/api/v1/admin/user/",
 };
 
 /*

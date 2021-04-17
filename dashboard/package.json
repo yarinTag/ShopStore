@@ -26,6 +26,7 @@
     "d3": "^6.6.2",
     "jquery": "^3.6.0",
     "mongodb": "^3.6.6",
+    "randomstring": "^1.1.5",
     "rxjs": "6.6.7",
     "rxjs-compat": "^6.6.7",
     "simple-sidenav": "^1.1.5",

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import {Order} from '../../../models/order'
+import { Order } from '../../../models/order'
 import { CurrentOrderService } from 'src/app/services/current-order.service';
 
 @Component({
@@ -10,44 +10,50 @@ import { CurrentOrderService } from 'src/app/services/current-order.service';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-  OrderUrl= environment.OrderUrl;
-  OrderDelete= environment.OrderDeleteUrl;
-  url=environment.EditOrderUrl
+  OrderUrl = environment.OrderUrl;
+  OrderDelete = environment.OrderDeleteUrl;
+  url = environment.EditOrderUrl
 
-  li:any;
-  orders=[];
+  li: any;
+  orders = [];
   status: string;
-  constructor(private http : HttpClient, private current:CurrentOrderService ){}
-  ngOnInit(): void {
-        
-    this.http.get(this.OrderUrl)
-    .subscribe(Response => {
-      this.li= Response; 
-      this.orders=this.li.orders 
-      console.log(this.li);
-    }); 
+  constructor(private http: HttpClient, private current: CurrentOrderService) { }
 
-  }
-
-  onClick(order : Order){
-    this.current.changeCurrentOrder(order);
-    
-  }
   Ostatus:String
+  searchValue :string
 
-  onClickEdit(order: Order):void{
+  ngOnInit(): void {
+    let token = localStorage.getItem("token")
+    if (token && localStorage.getItem("token") != "undefined" || "") {
+      this.http.get(this.OrderUrl)
+        .subscribe(Response => {
+          this.li = Response;
+          this.orders = this.li.orders
+          console.log(this.li);
+        });
+    }
+  }
+
+  onClick(order: Order) {
+    this.current.changeCurrentOrder(order);
+
+
+  }
+
+
+  onClickEdit(order: Order): void {
     this.current.changeCurrentOrder(order);
     // this.Ostatus= order.orderStatus
-    if(order.orderStatus==='Delivered'){
+    if (order.orderStatus === 'Delivered') {
       return
     }
-    if(this.Ostatus!==order.orderStatus){
-      order.orderStatus=this.Ostatus
-    } 
-    this.http.put(this.url+order._id,order).subscribe(() => this.status = 'Edit successful');
+    if (this.Ostatus !== order.orderStatus) {
+      order.orderStatus = this.Ostatus
+    }
+    this.http.put(this.url + order._id, order).subscribe(() => this.status = 'Edit successful');
   }
-  
-  onDeleteClick(order: Order):void{
+
+  onDeleteClick(order: Order): void {
     const url = `${environment.OrderDeleteUrl}${order._id}`
     console.log(url);
     this.http.delete(url).subscribe(() => this.status = 'Delete successful');
