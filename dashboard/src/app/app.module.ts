@@ -22,6 +22,7 @@ import { StatisticsModule } from './statistic/statistics/statistics.module';
 import { ProductEditModule } from './products/product-edit.module';
 import { OrderEditModule } from './orders/order-edit.module';
 import { UserEditModule } from './users/user-edit.module';
+import { AddProductModule } from './products/add-product.module';
 
 
 
@@ -36,7 +37,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
@@ -55,7 +56,7 @@ const routes: Routes = [
     ProductEditModule,
     OrderEditModule,
     UserEditModule,
-    
+    AddProductModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
