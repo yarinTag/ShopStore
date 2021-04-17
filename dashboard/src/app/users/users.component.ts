@@ -5,6 +5,7 @@ import { CurrentUserService } from '../services/current-user.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -25,7 +26,8 @@ export class UsersComponent {
               private currentUserService: CurrentUserService,private http : HttpClient){}
 
   ngOnInit() {
-    
+      let token = localStorage.getItem("token")
+    if (token && localStorage.getItem("token") != "undefined" || "") {
     this.http.get(this.UserUrl)
     .subscribe(Response => {
       this.li= Response;  
@@ -58,12 +60,12 @@ export class UsersComponent {
       this.users = data;
     });
   }
-  
-  onClick(user : User){
+
+  onClick(user: User) {
     this.currentUserService.changeCurrentUser(user);
   }
 
-  handlePanel(action : string){
+  handlePanel(action: string) {
     this.load();
   }
 

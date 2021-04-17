@@ -19,13 +19,28 @@ import { CurrentProductService } from '../services/current-product.service';
 
 @Injectable()
 export class ProductsComponent {
-  products : Product[] = [];  
+  products: Product[] = [];
 
-  ProductsUrl= environment.ProductUrl;
-  ProductDelete= environment.ProductDelete;
-  li:any;
-  lis=[];
+  ProductsUrl = environment.ProductUrl;
+  ProductDelete = environment.ProductDelete;
+  li: any;
+  lis = [];
   status: string;
+
+
+  ngOnInit(): void {
+    // this.http.get(`${this.AdminUrl}/?token=${token}`).subscribe(Response => { this.li = Response })
+    let token = localStorage.getItem("token")
+    if (token && localStorage.getItem("token") != "undefined" || "") {
+      this.http.get(this.ProductsUrl)
+        .subscribe(Response => {
+          this.li = Response;
+          this.products = this.li.products
+          this.sharedService.sendClickEvent(this.products)
+        });
+    }
+
+  
   searchValue :string
 
   constructor(private http : HttpClient,
@@ -47,20 +62,9 @@ onDeleteClick(product: Product):void{
 }
 
 
-ngOnInit(): void {
-
-  this.http.get(this.ProductsUrl)
-  .subscribe(Response => {    
-    this.li=Response;
-    this.products=this.li.products
-    this.sharedService.sendClickEvent(this.products)
-  });
-
-
- }
  load():void{
     this.ngOnInit()
-}
+  }
 
 }
 

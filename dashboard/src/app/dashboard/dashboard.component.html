@@ -1,8 +1,17 @@
+
+
 <app-login></app-login>
 
+<div *ngIf="isAuth()">
+    <h1 style="margin-left: 20px; margin-top:100px">Welcome Back,</h1>
+    <h1 style="margin-left: 20px;">Admin</h1>
+    <button style="margin-top: 200px" (click)="onClick()">Log Out</button>
+</div>
+<div *ngIf="!isAuth()">
+    <h1 style="margin-left: 20px; margin-top:100px">You are not allowed in here!</h1>
+    <h1 style="margin-left: 20px;">Admin Zone Only!</h1>
+</div>
 
-<h1 style="margin-left: 20px; margin-top:100px">Welcome Back,</h1>
-<h1 style="margin-left: 20px;">Admin</h1>
 
 
 <!-- <button (click)="onClick()">Add Users</button> -->

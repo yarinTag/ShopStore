@@ -60,17 +60,8 @@ const Navbar = () => {
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href="http://localhost:4200/users">
-                Edit Users
-              </a>
-              <a class="dropdown-item" href="http://localhost:4200/products">
-                Edit Products
-              </a>
-              <a class="dropdown-item" href="http://localhost:4200/orders">
-                Edit Orders
-              </a>
-              <a class="dropdown-item" href="http://localhost:4200/statistics">
-                Statistics
+              <a class="dropdown-item" href={`http://localhost:4200/dashboard?token=${localStorage.getItem("token")}`}>
+                Admin Dashboard
               </a>
             </div>
           </div>
