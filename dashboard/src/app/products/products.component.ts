@@ -26,6 +26,8 @@ export class ProductsComponent {
   li:any;
   lis=[];
   status: string;
+  searchValue :string
+
   constructor(private http : HttpClient,
      private productService:ProductService ,
      private sharedService:SharedService,

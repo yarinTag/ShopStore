@@ -20,7 +20,7 @@ export class UsersComponent {
 
   users = [];  
   li:any;
-
+  searchValue :string
   constructor(private usersService : UsersService, private current:CurrentUserService,
               private currentUserService: CurrentUserService,private http : HttpClient){}
 

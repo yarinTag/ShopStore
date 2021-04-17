@@ -14,7 +14,6 @@ import { ProductsComponent } from './products/products.component';
 import { OrdersComponent } from './orders/orders.component';
 import {ProductsModule} from './products/products.module'
 import { OrdersModule } from './orders/orders.module';
-import * as axios from 'axios';
 import { BarComponent } from './statistic/bar/bar.component';
 import { PieComponent } from './statistic/pie/pie.component';
 import { ScatterComponent } from './statistic/scatter/scatter.component';
@@ -23,6 +22,7 @@ import { StatisticsModule } from './statistic/statistics/statistics.module';
 import { ProductEditModule } from './products/product-edit.module';
 import { OrderEditModule } from './orders/order-edit.module';
 import { UserEditModule } from './users/user-edit.module';
+
 
 
 const routes: Routes = [
@@ -55,7 +55,7 @@ const routes: Routes = [
     ProductEditModule,
     OrderEditModule,
     UserEditModule,
-
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
