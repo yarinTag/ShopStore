@@ -22,6 +22,7 @@ export class OrdersComponent implements OnInit {
   Ostatus:String
   searchValue :string
 
+
   ngOnInit(): void {
     let token = localStorage.getItem("token")
     if (token && localStorage.getItem("token") != "undefined" || "") {
@@ -29,7 +30,7 @@ export class OrdersComponent implements OnInit {
         .subscribe(Response => {
           this.li = Response;
           this.orders = this.li.orders
-          console.log(this.li);
+          // console.log(this.li);
         });
     }
   }
@@ -39,6 +40,7 @@ export class OrdersComponent implements OnInit {
 
 
   }
+
 
 
   onClickEdit(order: Order): void {

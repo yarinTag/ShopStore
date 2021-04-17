@@ -20,6 +20,7 @@ const Cart = ({ history }) => {
     const newQty = quantity + 1;
 
     if (newQty > stock) return;
+    alert.success("Product has Added successfully");
 
     dispatch(addItemToCart(id, newQty));
   };
@@ -28,6 +29,7 @@ const Cart = ({ history }) => {
     const newQty = quantity - 1;
 
     if (newQty <= 0) return;
+    alert.success("Product has Removed successfully");
 
     dispatch(addItemToCart(id, newQty));
   };

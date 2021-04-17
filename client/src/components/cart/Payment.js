@@ -61,6 +61,7 @@ const Payment = ({ history }) => {
 
       dispatch(createOrder(order));
 
+      alert.success("Order Submitted successfully");
       history.push("/success");
     } catch (error) {
       document.querySelector("#pay_btn").disabled = false;

@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { serverApi } from "../../config";
 import { Link, Redirect } from "react-router-dom";
+import { withAlert } from "react-alert";
 
 class Register extends React.Component {
   constructor() {
@@ -31,10 +32,11 @@ class Register extends React.Component {
     console.log(newUser);
     axios
       .post(`${serverApi}/api/v1/register`, newUser)
-      .catch ((error) => console.log(error))
+      .catch((error) => console.log(error));
   }
 
   render() {
+    const alert = this.props.alert;
     if (this.props.loggedIn || localStorage.getItem("token"))
       return <Redirect to="/" />;
     return (
@@ -94,7 +96,7 @@ class Register extends React.Component {
                 </button>
                 <Link className="nav-link" to="/login">
                   Already have an account?
-              </Link>
+                </Link>
               </form>
             </div>
           </div>

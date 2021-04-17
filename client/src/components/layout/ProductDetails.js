@@ -119,7 +119,7 @@ const ProductDetails = ({ match }) => {
         <p id="product_seller mb-3">
           Sold by: <strong>{product.seller}</strong>
         </p>
-
+        {/* 
         <button
           id="review_btn"
           type="button"
@@ -128,9 +128,9 @@ const ProductDetails = ({ match }) => {
           data-target="#ratingModal"
         >
           Submit Your Review
-        </button>
+        </button> */}
 
-        <div className="row mt-2 mb-5">
+        {/* <div className="row mt-2 mb-5">
           <div className="rating w-50">
             <div
               className="modal fade"
@@ -192,7 +192,7 @@ const ProductDetails = ({ match }) => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

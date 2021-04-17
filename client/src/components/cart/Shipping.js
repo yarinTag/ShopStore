@@ -31,7 +31,7 @@ const Shipping = ({ history }) => {
     e.preventDefault();
 
     dispatch(saveShippingInfo({ address, city, phoneNu, zipCode, country }));
-    history.push("/order/confirm");
+    history.push("/confirm");
   };
   return (
     <>

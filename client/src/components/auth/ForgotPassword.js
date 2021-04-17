@@ -35,9 +35,9 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <div className="row wrapper">
+      <div style={{ marginLeft: "500px" }} className="row wrapper">
         <div className="col-10 col-lg-5">
-          <form className="shadow-lg" onSubmit={submitHandler}>
+          <form className="" onSubmit={submitHandler}>
             <h1 className="mb-3">Forgot Password</h1>
             <div className="form-group">
               <label htmlFor="email_field">Enter Email</label>
@@ -54,7 +54,7 @@ const ForgotPassword = () => {
             <button
               id="forgot_password_button"
               type="submit"
-              className="btn btn-block py-3"
+              className="btn btn-primary mr-3"
               disabled={loading ? true : false}
             >
               Send Email
